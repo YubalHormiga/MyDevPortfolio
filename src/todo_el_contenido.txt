@@ -1,0 +1,632 @@
+
+
+--- File: App.vue ---
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import { RouterView, useRoute } from 'vue-router'
+import NavigationBar from './components/NavigationBar.vue'
+import FooterView from './views/FooterView.vue'
+import MainView from './views/MainView.vue'
+
+const route = useRoute()
+
+const hasScrolled = ref(false)
+
+const handleScroll = () => {
+  if (window.scrollY > 100) {
+    hasScrolled.value = true
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+</script>
+
+<template>
+  <div class="container">
+    <header>
+      <NavigationBar />
+    </header>
+    <Transition name="slide-left">
+      <RouterView />
+    </Transition>
+    <div v-show="!hasScrolled" class="spacer"></div>
+
+    <Transition name="slide-left">
+      <main v-if="route.name === 'home' && hasScrolled" class="main">
+        <MainView />
+      </main>
+    </Transition>
+
+    <footer v-if="hasScrolled">
+      <FooterView />
+    </footer>
+  </div>
+</template>
+
+<style scoped>
+.container {
+  display: grid;
+  min-height: 100dvh;
+  grid-template-rows: auto 1fr auto;
+  overflow-y: hidden;
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: transform 1s ease-out;
+}
+
+.slide-left-enter-from {
+  transform: translateX(-100%);
+}
+
+.slide-left-enter-to {
+  transform: translateX(0);
+}
+
+.slide-left-leave-from {
+  transform: translateX(0);
+}
+
+.slide-left-leave-to {
+  transform: translateX(-100%);
+}
+
+.spacer {
+  height: 100rem;
+  width: 100%;
+}
+</style>
+
+
+
+--- File: assets\icons\dark_mode.svg ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\icons\light_mode.svg ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\main.css ---
+(Skipped (non-matching extension))
+
+
+--- File: components\CanineConnectDetails.vue ---
+
+<script setup></script>
+
+<template>
+  <h1>CAnineConnect</h1>
+</template>
+<style scoped></style>
+
+
+
+--- File: components\ContactSection.vue ---
+
+<template>
+  <section class="flexRow">
+    <div class="contactInfo">
+      <h3>Estás buscando un desarrollador junior para tu equipo?</h3>
+      <p>
+        Soy un desarrollador junior buscando mi primer empleo en el mundo del desarrollo web. Si
+        tienes un proyecto en mente o crees que puedo ser útil, ¡hablemos!
+      </p>
+      <a href="mailto:yubalhh@gmail.com" class="emailLink"> yubalhh@gmail.com </a>
+    </div>
+  </section>
+</template>
+
+<style scoped>
+.flexRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 24px 0;
+}
+
+.contactInfo h3 {
+  font-weight: 100;
+  margin-bottom: 1.5rem;
+}
+
+.emailLink {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 1rem;
+}
+
+.emailLink:hover {
+  text-underline-offset: 6px;
+  text-decoration-thickness: 3px;
+}
+
+.marginBottomSm {
+  margin-bottom: 8px;
+}
+
+.marginBottomLg {
+  margin-bottom: 16px;
+}
+</style>
+
+
+
+--- File: components\HeroSection.vue ---
+
+<script setup></script>
+
+<template>
+  <div class="hero-section">
+    <h1 class="hero-title">
+      <span class="hero-title-name">Hi! I’m <span>Yubal</span>,</span>
+      <span class="hero-title-role">
+        a Junior Full Stack <br />
+        Web Developer
+      </span>
+    </h1>
+  </div>
+</template>
+
+<style scoped>
+.hero-section {
+  margin-top: 5rem;
+  text-align: left;
+  font-family: 'Bangers', serif;
+  letter-spacing: 3px;
+}
+
+.hero-title {
+  font-size: 8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-title-name,
+.hero-title-role {
+  display: block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s forwards;
+}
+
+.hero-title-name {
+  animation-delay: 0.2s;
+}
+.hero-title-name span {
+  color: var(--primary-dark);
+}
+
+.hero-title-role {
+  animation-delay: 0.5s;
+}
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 4rem;
+  }
+}
+</style>
+
+
+
+--- File: components\NavigationBar.vue ---
+
+<script setup>
+import { onMounted, ref } from 'vue'
+import ThemeToggle from './ThemeTogle.vue'
+
+const emailVisible = ref(false)
+const copiedMessageVisible = ref(false)
+const navVisible = ref(false)
+
+const copyEmail = () => {
+  navigator.clipboard.writeText('yubalhh@gmail.com')
+  copiedMessageVisible.value = true
+  setTimeout(() => {
+    copiedMessageVisible.value = false
+  }, 2000)
+}
+
+onMounted(() => {
+  navVisible.value = true
+})
+</script>
+
+<template>
+  <Transition name="fade-scale" mode="out-in">
+    <nav v-if="navVisible">
+      <div class="logo">
+        <RouterLink to="/">
+          <span class="letter y">Y</span>
+          <span class="letter h1">H</span>
+          <span class="letter h2">H</span>
+        </RouterLink>
+      </div>
+
+      <div class="ready-work" @mouseenter="emailVisible = true" @mouseleave="emailVisible = false">
+        <span v-if="!emailVisible" class="fade-text">Ready to work!</span>
+        <span v-else class="email fade-text" @click="copyEmail"> yubalhh@gmail.com </span>
+        <Transition name="fade-opacity">
+          <div v-if="copiedMessageVisible" class="copied-message">Copied!</div>
+        </Transition>
+      </div>
+
+      <div>
+        <ThemeToggle />
+      </div>
+    </nav>
+  </Transition>
+</template>
+
+<style scoped>
+.fade-scale-enter-active,
+.fade-scale-leave-active {
+  transition:
+    opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1),
+    transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.fade-scale-enter-from,
+.fade-scale-leave-to {
+  opacity: 0;
+  transform: scale(0.3);
+}
+
+.fade-opacity-enter-active,
+.fade-opacity-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-opacity-enter-from,
+.fade-opacity-leave-to {
+  opacity: 0;
+}
+
+.fade-text {
+  display: inline-block;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.fade-text:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0;
+  font-family: 'Bangers', serif;
+  letter-spacing: 3px;
+}
+
+.logo {
+  position: relative;
+  font-weight: 900;
+  font-size: 5rem;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.letter {
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.y {
+  z-index: 1;
+}
+
+.h1 {
+  position: absolute;
+  left: 1.8rem;
+  top: 0;
+  z-index: 2;
+}
+
+.h2 {
+  position: absolute;
+  left: 3rem;
+  top: 0;
+  z-index: 3;
+}
+
+.ready-work {
+  display: flex;
+  gap: 1rem;
+  cursor: pointer;
+  padding: 1rem;
+  font-weight: 700;
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .ready-work {
+    display: none;
+  }
+}
+
+.ready-work:hover {
+  transform: scale(1.05);
+}
+.email {
+  color: var(--secundary-dark);
+}
+.copied-message {
+  margin-left: 2rem;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.copied-message {
+  text-align: center;
+  color: var(--tertiary-dark);
+}
+
+.copied-message:leave {
+  opacity: 0;
+  transform: scale(0.8);
+}
+</style>
+
+
+
+--- File: components\ProjectOverviewSection.vue ---
+
+<script setup>
+import { useRouter } from 'vue-router'
+import ContactSection from './ContactSection.vue'
+
+const router = useRouter()
+
+const navigateToCanineConnect = () => {
+  router.push({ name: 'canineconnect' })
+}
+</script>
+
+<template>
+  <section class="projectsSection compactPadding">
+    <h2 class="sectionTitle">Proyectos</h2>
+    <h2 class="sectionTitle details">Detalles</h2>
+  </section>
+
+  <section class="projectsSection">
+    <h2 class="projectTitle" @click="navigateToCanineConnect">CanineConnect</h2>
+    <div class="projectDescription">
+      <p>
+        Plataforma web que conecta a amantes de los perros con refugios para facilitar adopciones y
+        reportar mascotas perdidas.
+      </p>
+    </div>
+  </section>
+
+  <ContactSection />
+</template>
+
+<style scoped>
+.projectsSection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 4rem 0;
+  align-items: center;
+  gap: 2rem;
+  border-bottom: 1px solid var(--secundary-dark);
+}
+
+.projectsSection.compactPadding {
+  padding: 2rem 0; /* Aplica padding más pequeño */
+}
+
+.sectionTitle {
+  font-family: 'Wendy One', serif;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 768px) {
+  .projectsSection {
+    grid-template-columns: 1fr;
+  }
+  .details {
+    display: none;
+  }
+}
+
+.projectTitle {
+  font-size: 7rem;
+  cursor: pointer;
+  font-family: 'Wendy One', serif;
+  margin-bottom: 0.5rem;
+  color: var(--primary-dark);
+  transition: color 0.3s ease;
+}
+
+.projectTitle:hover {
+  color: var(--tertiary-dark);
+}
+
+[data-theme='light'] .projectTitle:hover {
+  color: var(--primary-ligth);
+}
+
+@media (max-width: 768px) {
+  .projectTitle {
+    font-size: 4rem;
+  }
+}
+</style>
+
+
+
+--- File: components\ThemeTogle.vue ---
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import darkModeIcon from '@/assets/icons/dark_mode.svg'
+import lightModeIcon from '@/assets/icons/light_mode.svg'
+
+const isDarkMode = ref(localStorage.getItem('theme') !== 'light')
+
+const toggleTheme = () => {
+  isDarkMode.value = !isDarkMode.value
+  const theme = isDarkMode.value ? 'dark' : 'light'
+  document.documentElement.setAttribute('data-theme', theme)
+  localStorage.setItem('theme', theme)
+}
+
+onMounted(() => {
+  document.documentElement.setAttribute('data-theme', isDarkMode.value ? 'dark' : 'light')
+})
+</script>
+
+<template>
+  <button @click="toggleTheme" aria-label="Toggle Theme">
+    <img :src="isDarkMode ? darkModeIcon : lightModeIcon" alt="Theme Icon" />
+  </button>
+</template>
+
+<style scoped>
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+img {
+  width: 44px;
+  height: 24px;
+}
+</style>
+
+
+
+--- File: main.js ---
+
+import './assets/main.css'
+
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router'
+
+const app = createApp(App)
+
+app.use(router)
+
+app.mount('#app')
+
+
+
+--- File: router\index.js ---
+
+import { createRouter, createWebHistory } from 'vue-router'
+import HeroSection from '../components/HeroSection.vue'
+
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: HeroSection,
+    },
+    {
+      path: '/about',
+      name: 'about',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/AboutView.vue'),
+    },
+    {
+      path: '/project/canineconnect',
+      name: 'canineconnect',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../components/CanineConnectDetails.vue'),
+    },
+  ],
+})
+
+export default router
+
+
+
+--- File: todo_el_contenido.txt ---
+(Skipped (non-matching extension))
+
+
+--- File: views\AboutView.vue ---
+
+<script setup></script>
+
+<template>
+  <div>
+    <h1>desde about</h1>
+  </div>
+</template>
+
+<style></style>
+
+
+
+--- File: views\FooterView.vue ---
+
+<script setup></script>
+
+<template>
+  <div>
+    <RouterLink to="/about">
+      <h2 class="link">About</h2>
+    </RouterLink>
+  </div>
+</template>
+
+<style scoped>
+.link {
+  cursor: pointer;
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.link:hover {
+  color: #0056b3;
+}
+</style>
+
+
+
+--- File: views\MainView.vue ---
+
+<script setup>
+import ProjectOverviewSection from '@/components/ProjectOverviewSection.vue'
+</script>
+
+<template>
+  <ProjectOverviewSection />
+</template>
+<style scoped></style>
+
