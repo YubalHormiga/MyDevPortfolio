@@ -4,8 +4,8 @@ import ContactSection from './ContactSection.vue'
 
 const router = useRouter()
 
-const navigateToCanineConnect = () => {
-  router.push({ name: 'canineconnect' })
+const navigateToProject = (projectName) => {
+  router.push({ path: '/project/' + projectName })
 }
 </script>
 
@@ -16,11 +16,26 @@ const navigateToCanineConnect = () => {
   </section>
 
   <section class="projectsSection">
-    <h2 class="projectTitle" @click="navigateToCanineConnect">CanineConnect</h2>
+    <h2 class="projectTitle" @click="navigateToProject('canineconnect')">CanineConnect</h2>
     <div class="projectDescription">
       <p>
         Plataforma web que conecta a amantes de los perros con refugios para facilitar adopciones y
         reportar mascotas perdidas.
+      </p>
+    </div>
+  </section>
+  <section class="projectsSection">
+    <h2 class="projectTitle" @click="navigateToProject('watersportworld')">WaterSportWorld</h2>
+    <div class="projectDescription">
+      <p>Proyecto Full Stack para la gestión de reservas de actividades acuáticas.</p>
+    </div>
+  </section>
+  <section class="projectsSection">
+    <h2 class="projectTitle" @click="navigateToProject('techmix')">TechMix</h2>
+    <div class="projectDescription">
+      <p>
+        Ecosistema de proyectos y ejercicios diseñados para aprender y dominar Vue.js, desde
+        componentes básicos hasta gestión avanzada de estados y estructuras complejas.
       </p>
     </div>
   </section>
@@ -31,15 +46,16 @@ const navigateToCanineConnect = () => {
 <style scoped>
 .projectsSection {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 5fr 4fr;
   padding: 4rem 0;
   align-items: center;
   gap: 2rem;
-  border-bottom: 1px solid var(--secundary-dark);
+  border-bottom: 2px solid var(--secundary-dark);
+  margin: 0 auto;
 }
 
 .projectsSection.compactPadding {
-  padding: 2rem 0; /* Aplica padding más pequeño */
+  padding: 3rem 0 2rem 0;
 }
 
 .sectionTitle {
@@ -47,7 +63,7 @@ const navigateToCanineConnect = () => {
   letter-spacing: 2px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .projectsSection {
     grid-template-columns: 1fr;
   }
@@ -63,6 +79,7 @@ const navigateToCanineConnect = () => {
   margin-bottom: 0.5rem;
   color: var(--primary-dark);
   transition: color 0.3s ease;
+  padding-left: 3px;
 }
 
 .projectTitle:hover {

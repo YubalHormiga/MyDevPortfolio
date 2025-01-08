@@ -18,12 +18,10 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue'),
     },
     {
-      path: '/project/canineconnect',
-      name: 'canineconnect',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../components/CanineConnectDetails.vue'),
+      path: '/project/:projectName', // Cambié la ruta para hacerla dinámica
+      name: 'project-detail',
+      component: () => import('../components/ProjectDetail.vue'),
+      props: true, // Permite pasar los parámetros de la ruta como props al componente
     },
   ],
 })

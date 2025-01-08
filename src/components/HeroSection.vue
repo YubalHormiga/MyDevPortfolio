@@ -18,6 +18,7 @@
   text-align: left;
   font-family: 'Bangers', serif;
   letter-spacing: 3px;
+  padding-left: 4px;
 }
 
 .hero-title {

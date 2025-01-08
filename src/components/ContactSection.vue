@@ -1,5 +1,5 @@
 <template>
-  <section class="flexRow">
+  <section class="InfoContainer">
     <div class="contactInfo">
       <h3>Estás buscando un desarrollador junior para tu equipo?</h3>
       <p>
@@ -12,11 +12,11 @@
 </template>
 
 <style scoped>
-.flexRow {
+.InfoContainer {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 24px 0;
+  padding: 5rem 0 0 0;
 }
 
 .contactInfo h3 {
@@ -29,12 +29,8 @@
   align-items: center;
   font-size: 2rem;
   font-weight: 700;
-  margin-top: 1rem;
-}
-
-.emailLink:hover {
-  text-underline-offset: 6px;
-  text-decoration-thickness: 3px;
+  margin: 3rem 0;
+  color: var(--primary-dark);
 }
 
 .marginBottomSm {

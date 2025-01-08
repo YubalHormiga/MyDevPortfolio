@@ -88,6 +88,7 @@ nav {
   margin: 2rem 0;
   font-family: 'Bangers', serif;
   letter-spacing: 3px;
+  padding: 0 0 0 3px;
 }
 
 .logo {

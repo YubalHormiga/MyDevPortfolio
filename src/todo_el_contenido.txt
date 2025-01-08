@@ -3,7 +3,7 @@
 --- File: App.vue ---
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 import NavigationBar from './components/NavigationBar.vue'
 import FooterView from './views/FooterView.vue'
@@ -18,17 +18,19 @@ const handleScroll = () => {
     hasScrolled.value = true
   }
 }
-
+watch(route, () => {
+  window.scrollTo(0, 0)
+})
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
 })
 </script>
 
 <template>
+  <header class="header">
+    <NavigationBar />
+  </header>
   <div class="container">
-    <header>
-      <NavigationBar />
-    </header>
     <Transition name="slide-left">
       <RouterView />
     </Transition>
@@ -39,14 +41,19 @@ onMounted(() => {
         <MainView />
       </main>
     </Transition>
-
-    <footer v-if="hasScrolled">
-      <FooterView />
-    </footer>
   </div>
+  <footer v-if="hasScrolled" class="footer">
+    <FooterView />
+  </footer>
 </template>
 
 <style scoped>
+.header,
+.footer {
+  width: 95%;
+  margin: 0 auto;
+  max-width: var(--max-width);
+}
 .container {
   display: grid;
   min-height: 100dvh;
@@ -91,6 +98,14 @@ onMounted(() => {
 (Skipped (non-matching extension))
 
 
+--- File: assets\images\favicon.png ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\images\mi-foto.png ---
+(Skipped (non-matching extension))
+
+
 --- File: assets\main.css ---
 (Skipped (non-matching extension))
 
@@ -109,7 +124,7 @@ onMounted(() => {
 --- File: components\ContactSection.vue ---
 
 <template>
-  <section class="flexRow">
+  <section class="InfoContainer">
     <div class="contactInfo">
       <h3>Estás buscando un desarrollador junior para tu equipo?</h3>
       <p>
@@ -122,11 +137,11 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.flexRow {
+.InfoContainer {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 24px 0;
+  padding: 10rem 0 0 0;
 }
 
 .contactInfo h3 {
@@ -139,12 +154,8 @@ onMounted(() => {
   align-items: center;
   font-size: 2rem;
   font-weight: 700;
-  margin-top: 1rem;
-}
-
-.emailLink:hover {
-  text-underline-offset: 6px;
-  text-decoration-thickness: 3px;
+  margin-top: 3rem;
+  color: var(--primary-dark);
 }
 
 .marginBottomSm {
@@ -180,6 +191,7 @@ onMounted(() => {
   text-align: left;
   font-family: 'Bangers', serif;
   letter-spacing: 3px;
+  padding-left: 4px;
 }
 
 .hero-title {
@@ -317,6 +329,7 @@ nav {
   margin: 2rem 0;
   font-family: 'Bangers', serif;
   letter-spacing: 3px;
+  padding: 0 0 0 3px;
 }
 
 .logo {
@@ -395,6 +408,120 @@ nav {
 
 
 
+--- File: components\ProjectNavegation.vue ---
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import ProjectNavegation from './ProjectNavegation.vue'
+
+const showButtons = ref(false)
+
+const router = useRouter()
+
+const route = useRoute()
+
+// Lógica para mostrar los botones de "Anterior" y "Siguiente" tras la transición del proyecto
+const handleProjectClick = () => {
+  showButtons.value = true
+}
+
+// Navegar entre los proyectos
+const navigateToProject = (projectName) => {
+  router.push({ name: projectName })
+}
+
+// Lógica para mover a proyectos anteriores y siguientes
+const handlePreviousProject = () => {
+  if (route.name === 'canineconnect') {
+    navigateToProject('techmix')
+  } else if (route.name === 'watersportworld') {
+    navigateToProject('canineconnect')
+  } else if (route.name === 'techmix') {
+    navigateToProject('watersportworld')
+  }
+}
+
+const handleNextProject = () => {
+  if (route.name === 'canineconnect') {
+    navigateToProject('watersportworld')
+  } else if (route.name === 'watersportworld') {
+    navigateToProject('techmix')
+  } else if (route.name === 'techmix') {
+    navigateToProject('canineconnect')
+  }
+}
+
+onMounted(() => {
+  showButtons.value = false // Inicialmente los botones están ocultos
+})
+</script>
+
+<template>
+  <h1>{{ route.name }}</h1>
+
+  <!-- Transición para mostrar el contenido del proyecto -->
+  <Transition name="fade-scale" mode="out-in">
+    <ProjectNavegation @click="handleProjectClick" />
+  </Transition>
+
+  <!-- Botones con transición controlada -->
+  <Transition name="fade-buttons">
+    <div v-if="showButtons" class="project-buttons">
+      <button @click="handlePreviousProject">Anterior</button>
+      <button @click="handleNextProject">Siguiente</button>
+    </div>
+  </Transition>
+</template>
+
+<style scoped>
+/* Transición para el contenido del proyecto */
+.fade-scale-enter-active,
+.fade-scale-leave-active {
+  transition:
+    opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1),
+    transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.fade-scale-enter-from,
+.fade-scale-leave-to {
+  opacity: 0;
+  transform: scale(0.3);
+}
+
+/* Transición para los botones */
+.fade-buttons-enter-active,
+.fade-buttons-leave-active {
+  transition: opacity 1s ease-in-out;
+}
+
+.fade-buttons-enter-from,
+.fade-buttons-leave-to {
+  opacity: 0;
+}
+
+.project-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.project-buttons button {
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-dark);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.project-buttons button:hover {
+  background-color: var(--tertiary-dark);
+}
+</style>
+
+
+
 --- File: components\ProjectOverviewSection.vue ---
 
 <script setup>
@@ -403,8 +530,8 @@ import ContactSection from './ContactSection.vue'
 
 const router = useRouter()
 
-const navigateToCanineConnect = () => {
-  router.push({ name: 'canineconnect' })
+const navigateToProject = (projecName) => {
+  router.push({ name: projecName })
 }
 </script>
 
@@ -415,11 +542,26 @@ const navigateToCanineConnect = () => {
   </section>
 
   <section class="projectsSection">
-    <h2 class="projectTitle" @click="navigateToCanineConnect">CanineConnect</h2>
+    <h2 class="projectTitle" @click="navigateToProject('canineconnect')">CanineConnect</h2>
     <div class="projectDescription">
       <p>
         Plataforma web que conecta a amantes de los perros con refugios para facilitar adopciones y
         reportar mascotas perdidas.
+      </p>
+    </div>
+  </section>
+  <section class="projectsSection">
+    <h2 class="projectTitle" @click="navigateToProject('watersportworld')">WaterSportWorld</h2>
+    <div class="projectDescription">
+      <p>Proyecto Full Stack para la gestión de reservas de actividades acuáticas.</p>
+    </div>
+  </section>
+  <section class="projectsSection">
+    <h2 class="projectTitle" @click="navigateToProject('techmix')">TechMix</h2>
+    <div class="projectDescription">
+      <p>
+        Ecosistema de proyectos y ejercicios diseñados para aprender y dominar Vue.js, desde
+        componentes básicos hasta gestión avanzada de estados y estructuras complejas.
       </p>
     </div>
   </section>
@@ -430,11 +572,12 @@ const navigateToCanineConnect = () => {
 <style scoped>
 .projectsSection {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 5fr 4fr;
   padding: 4rem 0;
   align-items: center;
   gap: 2rem;
   border-bottom: 1px solid var(--secundary-dark);
+  margin: 0 auto;
 }
 
 .projectsSection.compactPadding {
@@ -446,7 +589,7 @@ const navigateToCanineConnect = () => {
   letter-spacing: 2px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .projectsSection {
     grid-template-columns: 1fr;
   }
@@ -462,6 +605,7 @@ const navigateToCanineConnect = () => {
   margin-bottom: 0.5rem;
   color: var(--primary-dark);
   transition: color 0.3s ease;
+  padding-left: 3px;
 }
 
 .projectTitle:hover {
@@ -478,6 +622,17 @@ const navigateToCanineConnect = () => {
   }
 }
 </style>
+
+
+
+--- File: components\TechMixDetails.vue ---
+
+<script setup></script>
+
+<template>
+  <h1>TechMix</h1>
+</template>
+<style scoped></style>
 
 
 
@@ -520,6 +675,17 @@ img {
   height: 24px;
 }
 </style>
+
+
+
+--- File: components\WaterSportWorldDetails.vue ---
+
+<script setup></script>
+
+<template>
+  <h1>WaterSportWorld</h1>
+</template>
+<style scoped></style>
 
 
 
@@ -568,6 +734,22 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../components/CanineConnectDetails.vue'),
     },
+    {
+      path: '/project/watersportworld',
+      name: 'watersportworld',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../components/WaterSportWorldDetails.vue'),
+    },
+    {
+      path: '/project/techmix',
+      name: 'techmix',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../components/TechMixDetails.vue'),
+    },
   ],
 })
 
@@ -584,36 +766,157 @@ export default router
 <script setup></script>
 
 <template>
-  <div>
-    <h1>desde about</h1>
+  <div class="aboutContainer">
+    <div>
+      <div class="profilePhotoContainer">
+        <div class="profilePhoto">
+          <img src="../assets//images/mi-foto.png" alt="Foto de Yubal Hormiga" />
+        </div>
+        <div class="aboutMe">
+          <h3>Sobre <span> mí</span></h3>
+        </div>
+      </div>
+    </div>
+    <div class="bio">
+      <p>
+        Soy Yubal Hormiga, un desarrollador web Full Stack apasionado por la tecnología y con un
+        enfoque constante en la mejora y el aprendizaje. Tras completar un bootcamp intensivo de
+        desarrollo web en NEOLAND, he adquirido habilidades en tecnologías clave como HTML5, CSS3,
+        JavaScript, Vue.js, Node.js y MongoDB. Mi experiencia previa en análisis de datos, gestión
+        de proyectos y atención al cliente me ha permitido desarrollar una fuerte capacidad para
+        resolver problemas, pensar de manera crítica y trabajar de forma colaborativa.
+      </p>
+      <p>
+        En el camino hacia la transición al desarrollo web, he demostrado ser una persona
+        responsable, adaptable y proactiva, con un fuerte compromiso en ofrecer soluciones
+        tecnológicas eficientes y escalables. Mi objetivo es contribuir con mis habilidades técnicas
+        y mi experiencia en gestión para impulsar proyectos innovadores, al mismo tiempo que
+        continúo aprendiendo y creciendo dentro del mundo de la programación.
+      </p>
+      <p>
+        Actualmente, estoy buscando un puesto como desarrollador web junior donde pueda aplicar mis
+        conocimientos adquiridos, trabajar en equipo y seguir creciendo en el sector tecnológico.
+      </p>
+    </div>
   </div>
 </template>
 
-<style></style>
+<style scoped>
+.aboutContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+.profilePhotoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+@media (min-width: 768px) {
+  .profilePhotoContainer {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+.profilePhoto {
+  display: flex;
+  justify-content: center;
+}
+.aboutMe {
+  display: flex;
+  text-transform: uppercase;
+}
+.aboutMe h3,
+.aboutMe span {
+  display: block;
+  font-size: 8rem;
+  font-weight: bold;
+}
+p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+}
+</style>
 
 
 
 --- File: views\FooterView.vue ---
 
-<script setup></script>
+<script setup>
+const currentYear = new Date().getFullYear()
+</script>
 
 <template>
-  <div>
-    <RouterLink to="/about">
-      <h2 class="link">About</h2>
-    </RouterLink>
+  <div class="footerContainer">
+    <div class="footerWrapper">
+      <div class="aboutSection">
+        <div class="aboutLink">
+          <RouterLink to="/about">
+            <a class="link">About</a>
+          </RouterLink>
+        </div>
+        <div class="linkedinLink">
+          <a href="https://www.linkedin.com/in/yubal-hormiga/" target="_blank">Linkedin</a>
+        </div>
+        <div class="githubLink">
+          <a href="https://github.com/YubalHormiga" target="_blank">GitHub</a>
+        </div>
+      </div>
+    </div>
+    <div class="footerCredit">
+      <h3>Yubal Hormiga {{ currentYear }}</h3>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.link {
-  cursor: pointer;
-  color: #007bff;
-  text-decoration: underline;
+.footerContainer {
+  display: flex;
+  flex-direction: column;
+  font-size: 2.4rem;
+  margin: 5rem 0 3rem 0;
+}
+@media (min-width: 768px) {
+  .footerContainer {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 
-.link:hover {
-  color: #0056b3;
+.aboutSection {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  gap: 2rem;
+}
+@media (min-width: 768px) {
+  .aboutSection {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.footerCredit h3 {
+  font-size: 2.4rem;
+  display: flex;
+  gap: 0.5rem;
+}
+.footerCredit h3::before {
+  content: '©';
+  font-size: 3rem;
+  margin-right: 0.5rem;
+}
+.footerCredit {
+  margin-top: 3rem;
+}
+@media (min-width: 768px) {
+  .footerCredit {
+    margin-top: 0;
+  }
+}
+a {
+  text-decoration: none;
 }
 </style>
 

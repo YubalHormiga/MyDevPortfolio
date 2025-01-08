@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 import NavigationBar from './components/NavigationBar.vue'
 import FooterView from './views/FooterView.vue'
@@ -14,17 +14,19 @@ const handleScroll = () => {
     hasScrolled.value = true
   }
 }
-
+watch(route, () => {
+  window.scrollTo(0, 0)
+})
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
 })
 </script>
 
 <template>
+  <header class="header">
+    <NavigationBar />
+  </header>
   <div class="container">
-    <header>
-      <NavigationBar />
-    </header>
     <Transition name="slide-left">
       <RouterView />
     </Transition>
@@ -35,14 +37,19 @@ onMounted(() => {
         <MainView />
       </main>
     </Transition>
-
-    <footer v-if="hasScrolled">
-      <FooterView />
-    </footer>
   </div>
+  <footer v-if="hasScrolled" class="footer">
+    <FooterView />
+  </footer>
 </template>
 
 <style scoped>
+.header,
+.footer {
+  width: 95%;
+  margin: 0 auto;
+  max-width: var(--max-width);
+}
 .container {
   display: grid;
   min-height: 100dvh;
