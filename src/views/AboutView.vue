@@ -5,7 +5,7 @@
     <div>
       <div class="profilePhotoContainer">
         <div class="profilePhoto">
-          <img src="../assets//images/mi-foto.png" alt="Foto de Yubal Hormiga" />
+          <img src="../assets/images/mi-foto.png" alt="Foto de Yubal Hormiga" />
         </div>
         <div class="aboutMe">
           <h3>Sobre <span> mí</span></h3>

@@ -1,6 +1,10 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
 import { ref, watch, computed } from 'vue'
+
+import canineConnectImage from '@/assets/images/canineConnect.webp'
+import waterSportWorldImage from '@/assets/images/waterSportWorld.webp'
+import techMixImage from '@/assets/images/techMix.webp'
 const route = useRoute()
 const router = useRouter()
 
@@ -24,7 +28,7 @@ const projectDetails = {
     },
     liveLink: 'https://canine-connect.netlify.app/',
     githubLink: 'https://github.com/YubalHormiga/Proyectos-Personales/tree/main/05_CanineConnect',
-    image: '/src/assets/images/canineConnect.webp',
+    image: canineConnectImage,
   },
   watersportworld: {
     title: 'WaterSportWorld 🌊',
@@ -44,7 +48,7 @@ const projectDetails = {
     },
     liveLink: 'https://www.youtube.com/watch?v=Bje2UZDSICU',
     githubLink: 'https://github.com/YubalHormiga/Proyectos-Personales/tree/main/04_WaterSportWorld',
-    image: '/src/assets/images/waterSportWorld.webp',
+    image: waterSportWorldImage,
   },
   techmix: {
     title: 'TechMix Projects 💻',
@@ -64,7 +68,7 @@ const projectDetails = {
     },
     liveLink: 'https://techmixhub.netlify.app/',
     githubLink: 'https://github.com/YubalHormiga/TechMix',
-    image: '/src/assets/images/techMix.webp',
+    image: techMixImage,
   },
 }
 
