@@ -16,16 +16,16 @@
 .hero-section {
   margin-top: 5rem;
   text-align: left;
+  padding-left: 4px;
   font-family: 'Bangers', serif;
   letter-spacing: 3px;
-  padding-left: 4px;
 }
 
 .hero-title {
   font-size: 8rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  line-height: 1.4;
+  line-height: 1.6;
   display: flex;
   flex-direction: column;
 }
@@ -42,7 +42,7 @@
   animation-delay: 0.2s;
 }
 .hero-title-name span {
-  color: var(--primary-dark);
+  color: var(--primary);
 }
 
 .hero-title-role {
@@ -58,6 +58,9 @@
 @media (max-width: 768px) {
   .hero-title {
     font-size: 4rem;
+  }
+  .hero-section {
+    display: flex;
   }
 }
 </style>

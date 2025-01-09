@@ -1,64 +1,61 @@
 <script setup>
-const currentYear = new Date().getFullYear()
+import { computed } from 'vue'
+
+const currentYear = computed(() => new Date().getFullYear())
 </script>
 
 <template>
-  <div class="footerContainer">
-    <div class="footerWrapper">
-      <div class="aboutSection">
-        <div class="aboutLink">
-          <RouterLink to="/about">
-            <a class="link">About</a>
-          </RouterLink>
-        </div>
-        <div class="linkedinLink">
-          <a href="https://www.linkedin.com/in/yubal-hormiga/" target="_blank">Linkedin</a>
-        </div>
-        <div class="githubLink">
-          <a href="https://github.com/YubalHormiga" target="_blank">GitHub</a>
-        </div>
+  <div class="footer-container">
+    <div class="footer-wrapper">
+      <div class="about-section">
+        <RouterLink to="/about" class="link"> About </RouterLink>
+        <a
+          href="https://www.linkedin.com/in/yubal-hormiga/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link"
+        >
+          LinkedIn
+        </a>
+        <a
+          href="https://github.com/YubalHormiga"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link"
+        >
+          GitHub
+        </a>
       </div>
     </div>
-    <div class="footerCredit">
+    <div class="footer-credit">
       <h3>Yubal Hormiga {{ currentYear }}</h3>
     </div>
   </div>
 </template>
 
 <style scoped>
-.footerContainer {
+.footer-container {
   display: flex;
   flex-direction: column;
   font-size: 2.4rem;
   margin-top: 3rem;
-}
-@media (min-width: 768px) {
-  .footerContainer {
-    flex-direction: row;
-    justify-content: space-between;
-  }
+  color: var(--text-secondary);
 }
 
-.aboutSection {
+.about-section {
   display: flex;
-  flex-direction: row;
+  gap: 2rem;
   justify-content: center;
   margin-bottom: 2rem;
-  gap: 2rem;
 }
-@media (min-width: 768px) {
-  .aboutSection {
-    flex-direction: row;
-    align-items: center;
-  }
-}
-.footerCredit h3 {
-  font-size: 2.4rem;
+
+.footer-credit h3 {
   display: flex;
+  font-size: 2.4rem;
   justify-content: center;
-  gap: 0.5rem;
 }
-.footerCredit h3::before {
+
+.footer-credit h3::before {
   content: '©';
   font-size: 3rem;
   margin-right: 0.5rem;
@@ -66,5 +63,20 @@ const currentYear = new Date().getFullYear()
 
 a {
   text-decoration: none;
+  color: var(--secondary);
+}
+
+a:hover {
+  color: var(--tertiary);
+}
+
+@media (min-width: 768px) {
+  .footer-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .about-section {
+    align-items: center;
+  }
 }
 </style>

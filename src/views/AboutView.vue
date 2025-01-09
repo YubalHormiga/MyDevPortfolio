@@ -1,75 +1,163 @@
-<script setup></script>
+<script setup>
+import { profileData } from '@/data/profileData.js'
+import profilePhoto from '@/assets/images/mi-foto.png'
+</script>
 
 <template>
-  <div class="aboutContainer">
-    <div>
-      <div class="profilePhotoContainer">
-        <div class="profilePhoto">
-          <img src="../assets/images/mi-foto.png" alt="Foto de Yubal Hormiga" />
-        </div>
-        <div class="aboutMe">
-          <h3>Sobre <span> mí</span></h3>
-        </div>
+  <div class="about-container">
+    <div class="profile-photo-container">
+      <div class="profile-photo">
+        <img :src="profilePhoto" alt="Foto de Yubal Hormiga" />
+      </div>
+      <div class="about-me">
+        <h3>Sobre <span>mí</span></h3>
       </div>
     </div>
     <div class="bio">
-      <p>
-        Soy Yubal Hormiga, un desarrollador web Full Stack apasionado por la tecnología y con un
-        enfoque constante en la mejora y el aprendizaje. Tras completar un bootcamp intensivo de
-        desarrollo web en NEOLAND, he adquirido habilidades en tecnologías clave como HTML5, CSS3,
-        JavaScript, Vue.js, Node.js y MongoDB. Mi experiencia previa en análisis de datos, gestión
-        de proyectos y atención al cliente me ha permitido desarrollar una fuerte capacidad para
-        resolver problemas, pensar de manera crítica y trabajar de forma colaborativa.
-      </p>
-      <p>
-        En el camino hacia la transición al desarrollo web, he demostrado ser una persona
-        responsable, adaptable y proactiva, con un fuerte compromiso en ofrecer soluciones
-        tecnológicas eficientes y escalables. Mi objetivo es contribuir con mis habilidades técnicas
-        y mi experiencia en gestión para impulsar proyectos innovadores, al mismo tiempo que
-        continúo aprendiendo y creciendo dentro del mundo de la programación.
-      </p>
-      <p>
-        Actualmente, estoy buscando un puesto como desarrollador web junior donde pueda aplicar mis
-        conocimientos adquiridos, trabajar en equipo y seguir creciendo en el sector tecnológico.
-      </p>
+      <p v-for="(paragraph, index) in profileData.bio" :key="index">{{ paragraph }}</p>
+    </div>
+    <div class="additional-info">
+      <div class="education">
+        <h4>Educación</h4>
+        <p v-for="(item, index) in profileData.education" :key="index">{{ item }}</p>
+      </div>
+      <div class="tech-stack">
+        <h4>Stack Tecnológico</h4>
+        <ul>
+          <li v-for="(tech, index) in profileData.techStack" :key="index">{{ tech }}</li>
+        </ul>
+      </div>
+      <div class="skills">
+        <h4>Habilidades</h4>
+        <ul>
+          <li v-for="(skill, index) in profileData.skills" :key="index">{{ skill }}</li>
+        </ul>
+      </div>
+      <div class="languages">
+        <h4>Idiomas</h4>
+        <p>Español: {{ profileData.languages.spanish }}</p>
+        <a
+          href="https://drive.google.com/file/d/1qiKdtHr5qrSFSrJiJ_SJYkDqmETvJryU/view"
+          target="_blank"
+        >
+          Inglés: {{ profileData.languages.english }}
+        </a>
+      </div>
+      <div class="work-experience">
+        <h4>Experiencia laboral</h4>
+        <div v-for="(job, index) in profileData.workExperience" :key="index" class="job">
+          <h5>{{ job.title }}</h5>
+          <p>({{ job.period }})</p>
+          <p v-for="(responsibility, i) in job.responsibilities" :key="i">{{ responsibility }}</p>
+        </div>
+      </div>
+      <div class="download-cv">
+        <a href="/public/YubalCV.pdf" download>Descargar CV en PDF</a>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.aboutContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 5rem;
-}
-.profilePhotoContainer {
+.about-container {
   display: flex;
   flex-direction: column;
   gap: 3rem;
 }
-@media (min-width: 768px) {
-  .profilePhotoContainer {
-    flex-direction: row;
-    align-items: center;
-  }
+
+.profile-photo-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
-.profilePhoto {
+
+.profile-photo {
   display: flex;
   justify-content: center;
 }
-.aboutMe {
+
+.about-me {
   display: flex;
   text-transform: uppercase;
 }
-.aboutMe h3,
-.aboutMe span {
+
+.about-me h3,
+.about-me span {
   display: block;
   font-size: 8rem;
   font-weight: bold;
 }
-p {
-  font-size: 1.1em;
-  line-height: 1.6;
+
+.education,
+.tech-stack,
+.skills,
+.languages,
+.work-experience {
   margin-bottom: 3rem;
+}
+
+.education p,
+.languages p,
+.job p {
+  margin-bottom: 0;
+}
+
+.languages p,
+.languages a {
+  color: var(--text-secondary);
+}
+
+.work-experience p {
+  font-size: 1.3rem;
+}
+
+p {
+  margin-bottom: 3rem;
+}
+
+h4 {
+  margin-bottom: 1rem;
+  color: var(--primary-dark);
+}
+
+h5 {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.additional-info {
+  margin-top: 2rem;
+}
+
+.job {
+  margin-bottom: 2rem;
+}
+
+.download-cv {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+a {
+  color: var(--paragraph);
+  text-decoration: underline;
+}
+
+a:hover {
+  color: var(--tertiary-dark);
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+@media (min-width: 768px) {
+  .profile-photo-container {
+    flex-direction: row;
+    align-items: center;
+  }
 }
 </style>

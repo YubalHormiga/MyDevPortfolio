@@ -49,7 +49,9 @@ onMounted(() => {
   width: 95%;
   margin: 0 auto;
   max-width: var(--max-width);
+  color: var(--text-secondary);
 }
+
 .container {
   display: grid;
   min-height: 100dvh;
@@ -81,5 +83,14 @@ onMounted(() => {
 .spacer {
   height: 100rem;
   width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: var(--secondary);
+}
+
+a:hover {
+  color: var(--tertiary);
 }
 </style>

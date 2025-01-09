@@ -1,28 +1,38 @@
-/* main.css */
-
 :root {
-    --background-primary: #16161a;
-    --backgroun-secondary: #fffffe;
-    --text-primary: #1f1235;
-    --text-secondary: #fffffe;
+    --background-primary-dark: #16161a;
+    --background-secondary-dark: #242629;
+    --text-primary-dark: #94a1b2;
+    --text-secondary-dark: #fffffe;
     --primary-dark: #7f5af0;
-    --secundary-dark: #72757e;
+    --secondary-dark: #72757e;
     --tertiary-dark: #2cb67d;
-    --primary-ligth: #ff6e6c;
-    --secundary-ligth: #72757e;
-    --tertiary-ligth: #fbdd74;
+    --background-primary-light: #f4effc;
+    --background-secondary-light: #e2daeb;
+    --text-primary-light: #1b1325;
+    --text-secondary-light: #1f1135;
+    --primary-light: #ff6e6c;
+    --secondary-light: #67568c;
+    --tertiary-light: #fbdd74;
     --paragraph: #94a1b2;
     --max-width: 160rem;
 }
 
 [data-theme="dark"] {
-    --background: var(--background-primary);
-    --text-color: var(--text-secondary);
+    --background: var(--background-primary-dark);
+    --background-secondary: var(--background-secondary-dark);
+    --text-color: var(--text-secondary-dark);
+    --primary: var(--primary-dark);
+    --secondary: var(--secondary-dark);
+    --tertiary: var(--tertiary-dark);
 }
 
 [data-theme="light"] {
-    --background: var(--backgroun-secondary);
-    --text-color: var(--text-primary);
+    --background: var(--background-primary-light);
+    --background-secondary: var(--background-secondary-light);
+    --text-color: var(--text-primary-light);
+    --primary: var(--primary-light);
+    --secondary: var(--secondary-light);
+    --tertiary: var(--tertiary-light);
 }
 
 /* Globales */
@@ -53,7 +63,6 @@ body {
     text-align: justify;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-
 
 input,
 button,
@@ -97,18 +106,18 @@ h6 {
 
 p {
     font-size: 1.6rem;
-    line-height: 1;
+    line-height: 1.6;
     color: var(--paragraph);
 }
 
 a {
     text-decoration: none;
-    color: var(--secundary-dark);
+    color: var(--secondary);
 }
 
 a:hover {
     text-decoration: underline;
-    color: var(--tertiary-dark);
+    color: var(--tertiary);
 }
 
 ul,
@@ -134,5 +143,4 @@ svg {
     width: 95%;
     margin: 0 auto;
     max-width: var(--max-width);
-
 }
