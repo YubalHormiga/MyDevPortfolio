@@ -1,6 +1,5 @@
 <script setup>
 import { computed } from 'vue'
-
 const currentYear = computed(() => new Date().getFullYear())
 </script>
 
@@ -8,7 +7,7 @@ const currentYear = computed(() => new Date().getFullYear())
   <div class="footer-container">
     <div class="footer-wrapper">
       <div class="about-section">
-        <RouterLink to="/about" class="link"> About </RouterLink>
+        <RouterLink to="/about" class="link">About</RouterLink>
         <a
           href="https://www.linkedin.com/in/yubal-hormiga/"
           target="_blank"
@@ -35,11 +34,17 @@ const currentYear = computed(() => new Date().getFullYear())
 
 <style scoped>
 .footer-container {
+  width: 95%;
+  margin: 0 auto;
+  max-width: var(--max-width);
   display: flex;
   flex-direction: column;
   font-size: 2.4rem;
   margin-top: 3rem;
-  color: var(--text-secondary);
+  background-color: var(--background);
+  color: var(--text-color);
+  padding: 2rem;
+  border-top: 2px solid var(--primary);
 }
 
 .about-section {
@@ -53,21 +58,14 @@ const currentYear = computed(() => new Date().getFullYear())
   display: flex;
   font-size: 2.4rem;
   justify-content: center;
+  color: var(--primary);
 }
 
 .footer-credit h3::before {
   content: '©';
   font-size: 3rem;
   margin-right: 0.5rem;
-}
-
-a {
-  text-decoration: none;
-  color: var(--secondary);
-}
-
-a:hover {
-  color: var(--tertiary);
+  color: var(--primary);
 }
 
 @media (min-width: 768px) {

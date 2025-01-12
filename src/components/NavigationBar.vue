@@ -46,41 +46,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.fade-scale-enter-active,
-.fade-scale-leave-active {
-  transition:
-    opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1),
-    transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.fade-scale-enter-from,
-.fade-scale-leave-to {
-  opacity: 0;
-  transform: scale(0.3);
-}
-
-.fade-opacity-enter-active,
-.fade-opacity-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-opacity-enter-from,
-.fade-opacity-leave-to {
-  opacity: 0;
-}
-
-.fade-text {
-  display: inline-block;
-  transition:
-    opacity 0.5s ease,
-    transform 0.5s ease;
-}
-
-.fade-text:hover {
-  transform: scale(1.1);
-  opacity: 0.8;
-}
-
 nav {
   display: flex;
   justify-content: space-between;
@@ -142,9 +107,7 @@ nav {
 .ready-work:hover {
   transform: scale(1.05);
 }
-.email {
-  color: var(--secundary-dark);
-}
+
 .copied-message {
   margin-left: 2rem;
   transition:
@@ -152,15 +115,45 @@ nav {
     transform 0.5s ease;
   opacity: 1;
   transform: scale(1);
-}
-
-.copied-message {
-  text-align: center;
-  color: var(--tertiary-dark);
+  color: var(--copied-message-color);
 }
 
 .copied-message:leave {
   opacity: 0;
   transform: scale(0.8);
+}
+.fade-scale-enter-active,
+.fade-scale-leave-active {
+  transition:
+    opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1),
+    transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.fade-scale-enter-from,
+.fade-scale-leave-to {
+  opacity: 0;
+  transform: scale(0.3);
+}
+
+.fade-opacity-enter-active,
+.fade-opacity-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-opacity-enter-from,
+.fade-opacity-leave-to {
+  opacity: 0;
+}
+
+.fade-text {
+  display: inline-block;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.fade-text:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
 }
 </style>

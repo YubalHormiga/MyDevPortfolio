@@ -63,6 +63,7 @@ import profilePhoto from '@/assets/images/mi-foto.png'
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  color: var(--text-color);
 }
 
 .profile-photo-container {
@@ -86,6 +87,7 @@ import profilePhoto from '@/assets/images/mi-foto.png'
   display: block;
   font-size: 8rem;
   font-weight: bold;
+  color: var(--primary);
 }
 
 .education,
@@ -104,11 +106,10 @@ import profilePhoto from '@/assets/images/mi-foto.png'
 
 .languages p,
 .languages a {
-  color: var(--text-secondary);
+  color: var(--text-color);
 }
 
 .work-experience p {
-  font-size: 1.3rem;
 }
 
 p {
@@ -117,12 +118,13 @@ p {
 
 h4 {
   margin-bottom: 1rem;
-  color: var(--primary-dark);
+  color: var(--heading);
 }
 
 h5 {
   font-weight: 500;
   margin-bottom: 0.5rem;
+  color: var(--subheading);
 }
 
 ul {
@@ -144,14 +146,16 @@ ul {
 }
 
 a {
-  color: var(--paragraph);
+  color: var(--primary);
   text-decoration: underline;
 }
 
-a:hover {
-  color: var(--tertiary-dark);
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
+[data-theme='dark'] a:hover {
+  color: var(--highlight-dark);
+}
+
+[data-theme='light'] a:hover {
+  color: var(--highlight-light);
 }
 
 @media (min-width: 768px) {

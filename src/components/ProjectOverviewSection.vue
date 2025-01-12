@@ -47,6 +47,7 @@ const projects = ref(projectListData)
 .section-title {
   font-family: 'Wendy One', serif;
   letter-spacing: 2px;
+  color: var(--text-color);
 }
 
 @media (max-width: 1200px) {
@@ -63,13 +64,13 @@ const projects = ref(projectListData)
   cursor: pointer;
   font-family: 'Wendy One', serif;
   margin-bottom: 0.5rem;
-  color: var(--primary);
+  color: var(--button-color);
   transition: color 0.3s ease;
   padding-left: 3px;
 }
 
 .project-title:hover {
-  color: var(--tertiary);
+  color: var(--title-hover-color);
 }
 
 @media (max-width: 768px) {

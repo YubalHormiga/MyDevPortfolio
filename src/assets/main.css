@@ -1,42 +1,95 @@
 :root {
     --background-primary-dark: #16161a;
-    --background-secondary-dark: #242629;
-    --text-primary-dark: #94a1b2;
-    --text-secondary-dark: #fffffe;
-    --primary-dark: #7f5af0;
+    --text-primary-dark: #fffffe;
+    --paragraph-dark: #94a1b2;
+    --button-dark: #7f5af0;
+    --button-text-dark: #fffffe;
+    --button-hover-dark: #5f4b9a;
+    --primary-dark: #fffffe;
+    --highlight-dark: #ff0055;
     --secondary-dark: #72757e;
     --tertiary-dark: #2cb67d;
-    --background-primary-light: #f4effc;
-    --background-secondary-light: #e2daeb;
-    --text-primary-light: #1b1325;
-    --text-secondary-light: #1f1135;
-    --primary-light: #ff6e6c;
-    --secondary-light: #67568c;
-    --tertiary-light: #fbdd74;
-    --paragraph: #94a1b2;
-    --max-width: 160rem;
+    --heading-dark: #e53170;
+
+    --background-primary-light: #f0f4f8;
+    --text-primary-light: #2e3440;
+    --paragraph-light: #4c566a;
+    --button-light: #5e81ac;
+    --button-text-light: #ffffff;
+    --button-hover-light: #3b4c63;
+    --primary-light: #8fbcbb;
+    --highlight-light: #88c0d0;
+    --secondary-light: #d8dee9;
+    --tertiary-light: #e5e9f0;
+    --heading-light: #335c8d;
+
+    --link-color-dark: #fffffe;
+    --link-hover-color-dark: #ff0055;
+    --link-color-light: #5e81ac;
+    --link-hover-color-light: #3b4c63;
+    --copied-message-color-dark: #2cb67d;
+    --copied-message-color-light: #a3be8c;
+    --h2-color-dark: #e53170;
+    --h2-color-light: #2e3440;
+    --h3-color-dark: #7f5af0;
+    --h3-color-light: #5e81ac;
+
+    --li-color-dark: #c0c0c0;
+    --li-hover-color-dark: #ff0055;
+    --li-color-light: #3b4c63;
+    --li-hover-color-light: #ff88c0;
 }
 
 [data-theme="dark"] {
     --background: var(--background-primary-dark);
-    --background-secondary: var(--background-secondary-dark);
-    --text-color: var(--text-secondary-dark);
-    --primary: var(--primary-dark);
+    --text-color: var(--text-primary-dark);
+    --paragraph-color: var(--paragraph-dark);
+    --button-color: var(--button-dark);
+    --button-text-color: var(--button-text-dark);
+    --button-hover-color: var(--button-hover-dark);
+    --anchor: var(--link-color-dark);
+    --anchor-hover: var(--link-hover-color-dark);
+    --title-color: var(--primary-dark);
+    --title-hover-color: var(--highlight-dark);
     --secondary: var(--secondary-dark);
     --tertiary: var(--tertiary-dark);
+    --heading: var(--heading-dark);
+    --copied-message-color: var(--copied-message-color-dark);
+    --h2-color: var(--h2-color-dark);
+    --h3-color: var(--h3-color-dark);
+
+    /* Aplicado a li en dark */
+    --li-color: var(--li-color-dark);
+    --li-hover-color: var(--li-hover-color-dark);
 }
 
 [data-theme="light"] {
     --background: var(--background-primary-light);
-    --background-secondary: var(--background-secondary-light);
     --text-color: var(--text-primary-light);
-    --primary: var(--primary-light);
+    --paragraph-color: var(--paragraph-light);
+    --button-color: var(--button-light);
+    --button-text-color: var(--button-text-light);
+    --button-hover-color: var(--button-hover-light);
+    --anchor: var(--link-color-light);
+    --anchor-hover: var(--link-hover-color-light);
+    --title-color: var(--primary-light);
+    --title-hover-color: var(--highlight-light);
     --secondary: var(--secondary-light);
     --tertiary: var(--tertiary-light);
+    --heading: var(--heading-light);
+    --copied-message-color: var(--copied-message-color-light);
+    --h2-color: var(--h2-color-light);
+    --h3-color: var(--h3-color-light);
+
+    /* Aplicado a li en light */
+    --li-color: var(--li-color-light);
+    --li-hover-color: var(--li-hover-color-light);
 }
 
 /* Globales */
-html {
+html,
+body {
+    background-color: var(--background);
     box-sizing: border-box;
     font-size: 62.5%;
     scroll-behavior: smooth;
@@ -56,7 +109,6 @@ html {
 body {
     min-height: 100vh;
     font-family: 'Wendy One', serif;
-    background-color: var(--background);
     color: var(--text-color);
     font-size: 1.6rem;
     hyphens: auto;
@@ -69,55 +121,31 @@ button,
 textarea,
 select {
     font: inherit;
+    background: var(--button-color);
+    color: var(--button-text-color);
 }
 
 h1,
 h2,
 h3,
-h4,
-h5,
-h6 {
-    font-weight: 700;
-}
-
-h1 {
-    font-size: 2.4rem;
-}
-
-h2 {
-    font-size: 2rem;
-}
-
-h3 {
-    font-size: 1.8rem;
-}
-
 h4 {
-    font-size: 1.6rem;
-}
-
-h5 {
-    font-size: 1.4rem;
-}
-
-h6 {
-    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--heading);
 }
 
 p {
     font-size: 1.6rem;
     line-height: 1.6;
-    color: var(--paragraph);
+    color: var(--paragraph-color);
 }
 
 a {
     text-decoration: none;
-    color: var(--secondary);
+    color: var(--anchor);
 }
 
 a:hover {
-    text-decoration: underline;
-    color: var(--tertiary);
+    color: var(--anchor-hover);
 }
 
 ul,
@@ -127,7 +155,6 @@ ol {
 
 button {
     border: none;
-    background: none;
     cursor: pointer;
 }
 
@@ -143,4 +170,15 @@ svg {
     width: 95%;
     margin: 0 auto;
     max-width: var(--max-width);
+}
+
+/* Estilo para li */
+li {
+    color: var(--li-color);
+    font-size: 1.6rem;
+    line-height: 1.6;
+}
+
+li:hover {
+    color: var(--li-hover-color);
 }

@@ -49,7 +49,6 @@ onMounted(() => {
   width: 95%;
   margin: 0 auto;
   max-width: var(--max-width);
-  color: var(--text-secondary);
 }
 
 .container {
@@ -87,10 +86,10 @@ onMounted(() => {
 
 a {
   text-decoration: none;
-  color: var(--secondary);
+  color: var(--primary);
 }
 
 a:hover {
-  color: var(--tertiary);
+  color: var(--highlight);
 }
 </style>

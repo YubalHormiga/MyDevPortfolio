@@ -42,7 +42,7 @@
   animation-delay: 0.2s;
 }
 .hero-title-name span {
-  color: var(--primary);
+  color: var(--text-color);
 }
 
 .hero-title-role {

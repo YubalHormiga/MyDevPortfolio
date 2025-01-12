@@ -54,6 +54,7 @@ onMounted(() => {
   margin: 0 auto;
   max-width: var(--max-width);
 }
+
 .container {
   display: grid;
   min-height: 100dvh;
@@ -86,6 +87,15 @@ onMounted(() => {
   height: 100rem;
   width: 100%;
 }
+
+a {
+  text-decoration: none;
+  color: var(--primary);
+}
+
+a:hover {
+  color: var(--highlight);
+}
 </style>
 
 
@@ -98,6 +108,10 @@ onMounted(() => {
 (Skipped (non-matching extension))
 
 
+--- File: assets\images\canineConnect.webp ---
+(Skipped (non-matching extension))
+
+
 --- File: assets\images\favicon.png ---
 (Skipped (non-matching extension))
 
@@ -106,19 +120,16 @@ onMounted(() => {
 (Skipped (non-matching extension))
 
 
---- File: assets\main.css ---
+--- File: assets\images\techMix.webp ---
 (Skipped (non-matching extension))
 
 
---- File: components\CanineConnectDetails.vue ---
+--- File: assets\images\waterSportWorld.webp ---
+(Skipped (non-matching extension))
 
-<script setup></script>
 
-<template>
-  <h1>CAnineConnect</h1>
-</template>
-<style scoped></style>
-
+--- File: assets\main.css ---
+(Skipped (non-matching extension))
 
 
 --- File: components\ContactSection.vue ---
@@ -126,12 +137,12 @@ onMounted(() => {
 <template>
   <section class="InfoContainer">
     <div class="contactInfo">
-      <h3>Estás buscando un desarrollador junior para tu equipo?</h3>
+      <h3>¿Estás buscando un desarrollador junior para tu equipo?</h3>
       <p>
         Soy un desarrollador junior buscando mi primer empleo en el mundo del desarrollo web. Si
         tienes un proyecto en mente o crees que puedo ser útil, ¡hablemos!
       </p>
-      <a href="mailto:yubalhh@gmail.com" class="emailLink"> yubalhh@gmail.com </a>
+      <a href="mailto:yubalhh@gmail.com" class="emailLink">yubalhh@gmail.com</a>
     </div>
   </section>
 </template>
@@ -141,7 +152,7 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 10rem 0 0 0;
+  padding: 5rem 0 0 0;
 }
 
 .contactInfo h3 {
@@ -154,8 +165,7 @@ onMounted(() => {
   align-items: center;
   font-size: 2rem;
   font-weight: 700;
-  margin-top: 3rem;
-  color: var(--primary-dark);
+  margin: 3rem 0;
 }
 
 .marginBottomSm {
@@ -189,16 +199,16 @@ onMounted(() => {
 .hero-section {
   margin-top: 5rem;
   text-align: left;
+  padding-left: 4px;
   font-family: 'Bangers', serif;
   letter-spacing: 3px;
-  padding-left: 4px;
 }
 
 .hero-title {
   font-size: 8rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  line-height: 1.4;
+  line-height: 1.6;
   display: flex;
   flex-direction: column;
 }
@@ -215,7 +225,7 @@ onMounted(() => {
   animation-delay: 0.2s;
 }
 .hero-title-name span {
-  color: var(--primary-dark);
+  color: var(--text-color);
 }
 
 .hero-title-role {
@@ -231,6 +241,9 @@ onMounted(() => {
 @media (max-width: 768px) {
   .hero-title {
     font-size: 4rem;
+  }
+  .hero-section {
+    display: flex;
   }
 }
 </style>
@@ -287,41 +300,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.fade-scale-enter-active,
-.fade-scale-leave-active {
-  transition:
-    opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1),
-    transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.fade-scale-enter-from,
-.fade-scale-leave-to {
-  opacity: 0;
-  transform: scale(0.3);
-}
-
-.fade-opacity-enter-active,
-.fade-opacity-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-opacity-enter-from,
-.fade-opacity-leave-to {
-  opacity: 0;
-}
-
-.fade-text {
-  display: inline-block;
-  transition:
-    opacity 0.5s ease,
-    transform 0.5s ease;
-}
-
-.fade-text:hover {
-  transform: scale(1.1);
-  opacity: 0.8;
-}
-
 nav {
   display: flex;
   justify-content: space-between;
@@ -383,9 +361,7 @@ nav {
 .ready-work:hover {
   transform: scale(1.05);
 }
-.email {
-  color: var(--secundary-dark);
-}
+
 .copied-message {
   margin-left: 2rem;
   transition:
@@ -393,89 +369,13 @@ nav {
     transform 0.5s ease;
   opacity: 1;
   transform: scale(1);
-}
-
-.copied-message {
-  text-align: center;
-  color: var(--tertiary-dark);
+  color: var(--copied-message-color);
 }
 
 .copied-message:leave {
   opacity: 0;
   transform: scale(0.8);
 }
-</style>
-
-
-
---- File: components\ProjectNavegation.vue ---
-
-<script setup>
-import { ref, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import ProjectNavegation from './ProjectNavegation.vue'
-
-const showButtons = ref(false)
-
-const router = useRouter()
-
-const route = useRoute()
-
-// Lógica para mostrar los botones de "Anterior" y "Siguiente" tras la transición del proyecto
-const handleProjectClick = () => {
-  showButtons.value = true
-}
-
-// Navegar entre los proyectos
-const navigateToProject = (projectName) => {
-  router.push({ name: projectName })
-}
-
-// Lógica para mover a proyectos anteriores y siguientes
-const handlePreviousProject = () => {
-  if (route.name === 'canineconnect') {
-    navigateToProject('techmix')
-  } else if (route.name === 'watersportworld') {
-    navigateToProject('canineconnect')
-  } else if (route.name === 'techmix') {
-    navigateToProject('watersportworld')
-  }
-}
-
-const handleNextProject = () => {
-  if (route.name === 'canineconnect') {
-    navigateToProject('watersportworld')
-  } else if (route.name === 'watersportworld') {
-    navigateToProject('techmix')
-  } else if (route.name === 'techmix') {
-    navigateToProject('canineconnect')
-  }
-}
-
-onMounted(() => {
-  showButtons.value = false // Inicialmente los botones están ocultos
-})
-</script>
-
-<template>
-  <h1>{{ route.name }}</h1>
-
-  <!-- Transición para mostrar el contenido del proyecto -->
-  <Transition name="fade-scale" mode="out-in">
-    <ProjectNavegation @click="handleProjectClick" />
-  </Transition>
-
-  <!-- Botones con transición controlada -->
-  <Transition name="fade-buttons">
-    <div v-if="showButtons" class="project-buttons">
-      <button @click="handlePreviousProject">Anterior</button>
-      <button @click="handleNextProject">Siguiente</button>
-    </div>
-  </Transition>
-</template>
-
-<style scoped>
-/* Transición para el contenido del proyecto */
 .fade-scale-enter-active,
 .fade-scale-leave-active {
   transition:
@@ -489,34 +389,301 @@ onMounted(() => {
   transform: scale(0.3);
 }
 
-/* Transición para los botones */
-.fade-buttons-enter-active,
-.fade-buttons-leave-active {
-  transition: opacity 1s ease-in-out;
+.fade-opacity-enter-active,
+.fade-opacity-leave-active {
+  transition: opacity 0.5s ease;
 }
 
-.fade-buttons-enter-from,
-.fade-buttons-leave-to {
+.fade-opacity-enter-from,
+.fade-opacity-leave-to {
   opacity: 0;
 }
 
-.project-buttons {
+.fade-text {
+  display: inline-block;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.fade-text:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+</style>
+
+
+
+--- File: components\ProjectDetail.vue ---
+
+<script setup>
+import { useRoute, useRouter } from 'vue-router'
+import { ref, watch, computed } from 'vue'
+import { projectDetails } from '../data/projectData'
+
+const route = useRoute()
+const router = useRouter()
+
+const project = ref(projectDetails[route.params.projectName] || {})
+
+watch(
+  () => route.params.projectName,
+  (newProjectName) => {
+    project.value = projectDetails[newProjectName] || {}
+  },
+)
+
+const projectNames = Object.keys(projectDetails)
+
+const currentIndex = computed(() => {
+  return projectNames.indexOf(route.params.projectName)
+})
+
+const goToNextProject = () => {
+  const nextIndex = (currentIndex.value + 1) % projectNames.length
+  router.push({ name: 'project-detail', params: { projectName: projectNames[nextIndex] } })
+}
+
+const goToPreviousProject = () => {
+  const prevIndex = (currentIndex.value - 1 + projectNames.length) % projectNames.length
+  router.push({ name: 'project-detail', params: { projectName: projectNames[prevIndex] } })
+}
+</script>
+
+<template>
+  <section class="container">
+    <div class="project-header">
+      <div class="project-info">
+        <h1 class="project-title">{{ project.title }}</h1>
+        <p class="project-description">{{ project.description }}</p>
+        <p class="project-description">{{ project.summary }}</p>
+        <div class="project-details-container">
+          <div class="image-container">
+            <img :src="project.image" alt="Imagen de {{ project.title }}" class="project-image" />
+          </div>
+          <div class="container-links">
+            <div class="project-features">
+              <h2>Características Principales</h2>
+              <ul>
+                <li v-for="(feature, index) in project.features" :key="index">{{ feature }}</li>
+              </ul>
+            </div>
+            <div class="project-links">
+              <a :href="project.liveLink" target="_blank" class="link-button">Explorar</a>
+              <a :href="project.githubLink" target="_blank" class="link-button">GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="technologies">
+      <h2>Tecnologías utilizadas</h2>
+      <div class="technology-list">
+        <div>
+          <h3>Frontend:</h3>
+          <ul>
+            <li v-for="tech in project.technologies.frontend" :key="tech">{{ tech }}</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Backend:</h3>
+          <ul>
+            <li v-for="tech in project.technologies.backend" :key="tech">{{ tech }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-navigation">
+      <button @click="goToPreviousProject" class="navigation-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="m7.825 13l4.9 4.9q.3.3.288.7t-.313.7q-.3.275-.7.288t-.7-.288l-6.6-6.6q-.15-.15-.213-.325T4.426 12t.063-.375t.212-.325l6.6-6.6q.275-.275.688-.275t.712.275q.3.3.3.713t-.3.712L7.825 11H19q.425 0 .713.288T20 12t-.288.713T19 13z"
+          />
+        </svg>
+        Anterior
+      </button>
+      <button @click="goToNextProject" class="navigation-button">
+        Siguiente
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M16.175 13H4v-2h12.175l-5.6-5.6L12 4l8 8l-8 8l-1.425-1.4z" />
+        </svg>
+      </button>
+    </div>
+  </section>
+</template>
+
+<style scoped>
+.project-header {
   display: flex;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.project-info {
+  flex: 1;
+}
+
+.project-title {
+  color: var(--title-color); /* Title color based on theme */
+}
+
+.project-description {
+  margin: 1rem 0;
+  color: var(--paragraph-color); /* Paragraph color based on theme */
+}
+
+.project-details-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.container-links {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   gap: 1rem;
+}
+
+.project-image {
+  width: 100%;
+  height: auto;
+  max-height: 40rem;
+  border-radius: 10px;
+}
+
+.project-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.project-links {
+  display: flex;
+  justify-content: space-around;
+}
+
+.link-button {
+  background-color: var(--button-color); /* Button color */
+  color: var(--button-text-color); /* Button text color */
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: background-color 0.3s;
+}
+
+.link-button:hover {
+  background-color: var(--tertiary); /* Hover color */
+  color: var(--text-secondary);
+}
+
+.technologies {
+  margin-top: 1rem;
+  padding: 0 2rem;
+  color: var(--text-color);
+}
+
+h2 {
+  text-align: center;
+  color: var(--h2-color); /* Heading color for section titles */
+  margin-bottom: 1rem;
+}
+
+h3 {
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: var(--h3-color); /* Color for subheadings */
+}
+
+.technology-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
   margin-top: 1rem;
 }
 
-.project-buttons button {
-  padding: 0.5rem 1rem;
-  background-color: var(--primary-dark);
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.technology-list div {
+  text-align: center;
 }
 
-.project-buttons button:hover {
-  background-color: var(--tertiary-dark);
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.project-navigation {
+  display: inline-flex;
+  justify-content: space-around;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.navigation-button {
+  background-color: var(--button-color); /* Button color */
+  color: var(--button-text-color); /* Button text color */
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navigation-button:hover {
+  background-color: var(--button-hover-color); /* Hover effect for navigation buttons */
+}
+
+@media (min-width: 768px) {
+  .project-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .project-info {
+    margin-top: 1rem;
+  }
+
+  .project-description {
+    text-align: justify;
+  }
+
+  .project-details-container {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .image-container {
+    flex: 2;
+    max-width: 100%;
+  }
+
+  .container-links {
+    flex: 1;
+    margin-top: 2rem;
+  }
+
+  .technology-list {
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  .technology-list div {
+    width: 100%;
+  }
 }
 </style>
 
@@ -525,44 +692,30 @@ onMounted(() => {
 --- File: components\ProjectOverviewSection.vue ---
 
 <script setup>
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { projectListData } from '../data/projectListData'
 import ContactSection from './ContactSection.vue'
 
 const router = useRouter()
 
-const navigateToProject = (projecName) => {
-  router.push({ name: projecName })
+const navigateToProject = (projectName) => {
+  router.push({ path: '/project/' + projectName })
 }
+
+const projects = ref(projectListData)
 </script>
 
 <template>
-  <section class="projectsSection compactPadding">
-    <h2 class="sectionTitle">Proyectos</h2>
-    <h2 class="sectionTitle details">Detalles</h2>
+  <section class="projects-section compact-padding">
+    <h2 class="section-title">Proyectos</h2>
+    <h2 class="section-title details">Detalles</h2>
   </section>
 
-  <section class="projectsSection">
-    <h2 class="projectTitle" @click="navigateToProject('canineconnect')">CanineConnect</h2>
-    <div class="projectDescription">
-      <p>
-        Plataforma web que conecta a amantes de los perros con refugios para facilitar adopciones y
-        reportar mascotas perdidas.
-      </p>
-    </div>
-  </section>
-  <section class="projectsSection">
-    <h2 class="projectTitle" @click="navigateToProject('watersportworld')">WaterSportWorld</h2>
-    <div class="projectDescription">
-      <p>Proyecto Full Stack para la gestión de reservas de actividades acuáticas.</p>
-    </div>
-  </section>
-  <section class="projectsSection">
-    <h2 class="projectTitle" @click="navigateToProject('techmix')">TechMix</h2>
-    <div class="projectDescription">
-      <p>
-        Ecosistema de proyectos y ejercicios diseñados para aprender y dominar Vue.js, desde
-        componentes básicos hasta gestión avanzada de estados y estructuras complejas.
-      </p>
+  <section v-for="project in projects" :key="project.name" class="projects-section">
+    <h2 class="project-title" @click="navigateToProject(project.name)">{{ project.title }}</h2>
+    <div class="project-description">
+      <p>{{ project.description }}</p>
     </div>
   </section>
 
@@ -570,27 +723,27 @@ const navigateToProject = (projecName) => {
 </template>
 
 <style scoped>
-.projectsSection {
+.projects-section {
   display: grid;
   grid-template-columns: 5fr 4fr;
   padding: 4rem 0;
   align-items: center;
   gap: 2rem;
-  border-bottom: 1px solid var(--secundary-dark);
+  border-bottom: 2px solid var(--secondary);
   margin: 0 auto;
 }
 
-.projectsSection.compactPadding {
-  padding: 2rem 0; /* Aplica padding más pequeño */
+.projects-section.compact-padding {
+  padding: 3rem 0 2rem 0;
 }
 
-.sectionTitle {
+.section-title {
   font-family: 'Wendy One', serif;
   letter-spacing: 2px;
 }
 
 @media (max-width: 1200px) {
-  .projectsSection {
+  .projects-section {
     grid-template-columns: 1fr;
   }
   .details {
@@ -598,26 +751,22 @@ const navigateToProject = (projecName) => {
   }
 }
 
-.projectTitle {
+.project-title {
   font-size: 7rem;
   cursor: pointer;
   font-family: 'Wendy One', serif;
   margin-bottom: 0.5rem;
-  color: var(--primary-dark);
+  color: var(--title-color);
   transition: color 0.3s ease;
   padding-left: 3px;
 }
 
-.projectTitle:hover {
-  color: var(--tertiary-dark);
-}
-
-[data-theme='light'] .projectTitle:hover {
-  color: var(--primary-ligth);
+.project-title:hover {
+  color: var(--title-hover-color);
 }
 
 @media (max-width: 768px) {
-  .projectTitle {
+  .project-title {
     font-size: 4rem;
   }
 }
@@ -625,32 +774,26 @@ const navigateToProject = (projecName) => {
 
 
 
---- File: components\TechMixDetails.vue ---
-
-<script setup></script>
-
-<template>
-  <h1>TechMix</h1>
-</template>
-<style scoped></style>
-
-
-
 --- File: components\ThemeTogle.vue ---
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import darkModeIcon from '@/assets/icons/dark_mode.svg'
 import lightModeIcon from '@/assets/icons/light_mode.svg'
 
 const isDarkMode = ref(localStorage.getItem('theme') !== 'light')
 
+const themeIcon = computed(() => (isDarkMode.value ? darkModeIcon : lightModeIcon))
+
 const toggleTheme = () => {
   isDarkMode.value = !isDarkMode.value
-  const theme = isDarkMode.value ? 'dark' : 'light'
+}
+
+watch(isDarkMode, (newValue) => {
+  const theme = newValue ? 'dark' : 'light'
   document.documentElement.setAttribute('data-theme', theme)
   localStorage.setItem('theme', theme)
-}
+})
 
 onMounted(() => {
   document.documentElement.setAttribute('data-theme', isDarkMode.value ? 'dark' : 'light')
@@ -658,8 +801,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <button @click="toggleTheme" aria-label="Toggle Theme">
-    <img :src="isDarkMode ? darkModeIcon : lightModeIcon" alt="Theme Icon" />
+  <button @click="toggleTheme" aria-label="Toggle Theme" aria-live="polite">
+    <img :src="themeIcon" alt="Theme Icon" />
   </button>
 </template>
 
@@ -678,14 +821,168 @@ img {
 
 
 
---- File: components\WaterSportWorldDetails.vue ---
+--- File: data\profileData.js ---
 
-<script setup></script>
+export const profileData = {
+  bio: [
+    `Soy Yubal Hormiga, un apasionado desarrollador web Full Stack con un enfoque constante en la mejora continua y el aprendizaje. Después de completar un bootcamp intensivo en desarrollo web en NEOLAND, he adquirido sólidas habilidades en tecnologías fundamentales como HTML5, CSS3, JavaScript, Vue.js, Node.js y MongoDB.`,
+    `Mi experiencia previa en análisis de datos, gestión de proyectos y atención al cliente me ha permitido desarrollar una notable capacidad para resolver problemas, pensar de manera crítica y colaborar eficazmente. He demostrado ser una persona responsable, adaptable y proactiva, comprometida con ofrecer soluciones tecnológicas eficientes y escalables.`,
+    `Estoy buscando un puesto como desarrollador web junior donde pueda aplicar mis conocimientos técnicos y mi experiencia en gestión para impulsar proyectos innovadores. Mi objetivo es contribuir con mis habilidades y seguir creciendo en el fascinante mundo de la programación.`,
+  ],
+  education: [
+    `Full Stack Web Developer, Neoland - Developer Bootcamp (Septiembre 2022 – Diciembre 2022)`,
+    `Grado Medio en Sistemas Microinformáticos y Redes, FP Ilerna Online (2020 – 2022)`,
+    `Diplomado en Dirección y Administración de Empresas, Escuela de Negocios M.B.A (1998 – 2002)`,
+  ],
+  techStack: [
+    'HTML5',
+    'CSS3',
+    'Tailwind',
+    'JavaScript',
+    'Vue.js',
+    'Node.js',
+    'Express.js',
+    'MongoDB',
+    'Firebase',
+    'Git',
+  ],
+  skills: [
+    'Pensamiento crítico',
+    'Aptitud positiva',
+    'Resiliente',
+    'Capacidad de planificación y organización',
+    'Persona proactiva',
+    'Compromiso con el trabajo',
+  ],
+  languages: {
+    spanish: 'Nativo',
+    english: 'B1-B2 EF SET, Febrero 2023',
+  },
+  workExperience: [
+    {
+      title: 'Nautalia Viajes - Agente de viajes',
+      period: 'Febrero 2019 – Mayo 2020',
+      responsibilities: [
+        'Análisis de datos para mejorar estrategias de marketing.',
+        'Resolución de problemas complejos de itinerarios.',
+        'Comunicación efectiva y atención al cliente.',
+      ],
+    },
+    {
+      title: 'Formiga Tours - Administrador solidario',
+      period: 'Junio 2013 – Diciembre 2018',
+      responsibilities: [
+        'Coordinación de proyectos de viajes.',
+        'Colaboración con equipos diversos.',
+        'Adaptabilidad a cambios del mercado.',
+      ],
+    },
+    {
+      title: 'Orizonia - Agente de viajes',
+      period: 'Abril 2006 - Febrero 2013',
+      responsibilities: [
+        'Ventas, asesoramiento y gestión para empresas y particulares.',
+        'Servicio al cliente.',
+        'Gestión y actualización de contenidos web.',
+      ],
+    },
+  ],
+}
 
-<template>
-  <h1>WaterSportWorld</h1>
-</template>
-<style scoped></style>
+
+
+--- File: data\projectData.js ---
+
+import canineConnectImage from '@/assets/images/canineConnect.webp'
+import waterSportWorldImage from '@/assets/images/waterSportWorld.webp'
+import techMixImage from '@/assets/images/techMix.webp'
+
+export const projectDetails = {
+  canineconnect: {
+    title: 'CanineConnect 🐶',
+    description: `CanineConnect es una plataforma web diseñada para facilitar la conexión entre amantes de los perros, refugios y protectoras. Esta aplicación ofrece funcionalidades para gestionar adopciones, reportar mascotas perdidas, compartir historias inspiradoras y mucho más.`,
+    summary:
+      'Una comunidad en línea dedicada al bienestar animal, mejorando los procesos de adopción y rescate de perros.',
+    features: [
+      'Reportes de mascotas perdidas y encontradas',
+      'Gestión de usuarios y roles',
+      'Historias inspiradoras',
+      'Chat en tiempo real',
+      'Adopción de perros',
+    ],
+    technologies: {
+      frontend: ['Vue.js', 'Pinia', 'Vue Router', 'CSS'],
+      backend: ['Firebase', 'The Dog API'],
+    },
+    liveLink: 'https://canine-connect.netlify.app/',
+    githubLink: 'https://github.com/YubalHormiga/Proyectos-Personales/tree/main/05_CanineConnect',
+    image: canineConnectImage,
+  },
+  watersportworld: {
+    title: 'WaterSportWorld 🌊',
+    description: `WaterSportWorld es una aplicación integral para gestionar reservas de actividades acuáticas. Con un backend robusto en Node.js y un frontend dinámico en Vue.js, los usuarios pueden reservar actividades de deportes acuáticos de manera sencilla y segura.`,
+    summary:
+      'Gestión de reservas de deportes acuáticos con una experiencia fluida tanto para el usuario como para el administrador.',
+    features: [
+      'Reservas interactivas con selección de actividades',
+      'Navegación intuitiva entre secciones clave',
+      'Visualización de información de usuario',
+      'Registro e inicio de sesión seguro',
+      'Gestión de servicios acuáticos',
+    ],
+    technologies: {
+      frontend: ['Vue.js', 'Pinia', 'Vue Router', 'CSS', 'PrimeVue', 'SweetAlert2'],
+      backend: ['Node.js', 'Express', 'MongoDB', 'Mongoose', 'JWT', 'Nodemailer'],
+    },
+    liveLink: 'https://www.youtube.com/watch?v=Bje2UZDSICU',
+    githubLink: 'https://github.com/YubalHormiga/Proyectos-Personales/tree/main/04_WaterSportWorld',
+    image: waterSportWorldImage,
+  },
+  techmix: {
+    title: 'TechMix Projects 💻',
+    description: `TechMix es una colección de proyectos prácticos enfocados en aprender y dominar Vue.js. Con una estructura modular, cada proyecto tiene como objetivo mejorar las habilidades clave en el desarrollo web, utilizando Vue.js y otras herramientas modernas.`,
+    summary:
+      'Proyectos progresivos para reforzar el aprendizaje de Vue.js y mejorar las habilidades en desarrollo web.',
+    features: [
+      'Desarrollo con herramientas modernas como Vite, Tailwind CSS y ESLint',
+      'Ejercicios lógicos y pruebas técnicas',
+      'Proyectos enfocados en Vue.js',
+      'Optimización de rendimiento',
+      'Diseño modular y escalable',
+    ],
+    technologies: {
+      frontend: ['Vue.js', 'Tailwind CSS', 'Vite', 'ESLint', 'Prettier'],
+      backend: ['Se planea integrar backend en el futuro.'],
+    },
+    liveLink: 'https://techmixhub.netlify.app/',
+    githubLink: 'https://github.com/YubalHormiga/TechMix',
+    image: techMixImage,
+  },
+}
+
+
+
+--- File: data\projectListData.js ---
+
+export const projectListData = [
+  {
+    name: 'canineconnect',
+    title: 'CanineConnect',
+    description:
+      'Plataforma web que conecta a amantes de los perros con refugios para facilitar adopciones y reportar mascotas perdidas.',
+  },
+  {
+    name: 'watersportworld',
+    title: 'WaterSportWorld',
+    description: 'Proyecto Full Stack para la gestión de reservas de actividades acuáticas.',
+  },
+  {
+    name: 'techmix',
+    title: 'TechMix',
+    description:
+      'Ecosistema de proyectos y ejercicios diseñados para aprender y dominar Vue.js, desde componentes básicos hasta gestión avanzada de estados y estructuras complejas.',
+  },
+]
 
 
 
@@ -727,28 +1024,10 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue'),
     },
     {
-      path: '/project/canineconnect',
-      name: 'canineconnect',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../components/CanineConnectDetails.vue'),
-    },
-    {
-      path: '/project/watersportworld',
-      name: 'watersportworld',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../components/WaterSportWorldDetails.vue'),
-    },
-    {
-      path: '/project/techmix',
-      name: 'techmix',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../components/TechMixDetails.vue'),
+      path: '/project/:projectName', // Cambié la ruta para hacerla dinámica
+      name: 'project-detail',
+      component: () => import('../components/ProjectDetail.vue'),
+      props: true, // Permite pasar los parámetros de la ruta como props al componente
     },
   ],
 })
@@ -763,79 +1042,172 @@ export default router
 
 --- File: views\AboutView.vue ---
 
-<script setup></script>
+<script setup>
+import { profileData } from '@/data/profileData.js'
+import profilePhoto from '@/assets/images/mi-foto.png'
+</script>
 
 <template>
-  <div class="aboutContainer">
-    <div>
-      <div class="profilePhotoContainer">
-        <div class="profilePhoto">
-          <img src="../assets//images/mi-foto.png" alt="Foto de Yubal Hormiga" />
-        </div>
-        <div class="aboutMe">
-          <h3>Sobre <span> mí</span></h3>
-        </div>
+  <div class="about-container">
+    <div class="profile-photo-container">
+      <div class="profile-photo">
+        <img :src="profilePhoto" alt="Foto de Yubal Hormiga" />
+      </div>
+      <div class="about-me">
+        <h3>Sobre <span>mí</span></h3>
       </div>
     </div>
     <div class="bio">
-      <p>
-        Soy Yubal Hormiga, un desarrollador web Full Stack apasionado por la tecnología y con un
-        enfoque constante en la mejora y el aprendizaje. Tras completar un bootcamp intensivo de
-        desarrollo web en NEOLAND, he adquirido habilidades en tecnologías clave como HTML5, CSS3,
-        JavaScript, Vue.js, Node.js y MongoDB. Mi experiencia previa en análisis de datos, gestión
-        de proyectos y atención al cliente me ha permitido desarrollar una fuerte capacidad para
-        resolver problemas, pensar de manera crítica y trabajar de forma colaborativa.
-      </p>
-      <p>
-        En el camino hacia la transición al desarrollo web, he demostrado ser una persona
-        responsable, adaptable y proactiva, con un fuerte compromiso en ofrecer soluciones
-        tecnológicas eficientes y escalables. Mi objetivo es contribuir con mis habilidades técnicas
-        y mi experiencia en gestión para impulsar proyectos innovadores, al mismo tiempo que
-        continúo aprendiendo y creciendo dentro del mundo de la programación.
-      </p>
-      <p>
-        Actualmente, estoy buscando un puesto como desarrollador web junior donde pueda aplicar mis
-        conocimientos adquiridos, trabajar en equipo y seguir creciendo en el sector tecnológico.
-      </p>
+      <p v-for="(paragraph, index) in profileData.bio" :key="index">{{ paragraph }}</p>
+    </div>
+    <div class="additional-info">
+      <div class="education">
+        <h4>Educación</h4>
+        <p v-for="(item, index) in profileData.education" :key="index">{{ item }}</p>
+      </div>
+      <div class="tech-stack">
+        <h4>Stack Tecnológico</h4>
+        <ul>
+          <li v-for="(tech, index) in profileData.techStack" :key="index">{{ tech }}</li>
+        </ul>
+      </div>
+      <div class="skills">
+        <h4>Habilidades</h4>
+        <ul>
+          <li v-for="(skill, index) in profileData.skills" :key="index">{{ skill }}</li>
+        </ul>
+      </div>
+      <div class="languages">
+        <h4>Idiomas</h4>
+        <p>Español: {{ profileData.languages.spanish }}</p>
+        <a
+          href="https://drive.google.com/file/d/1qiKdtHr5qrSFSrJiJ_SJYkDqmETvJryU/view"
+          target="_blank"
+        >
+          Inglés: {{ profileData.languages.english }}
+        </a>
+      </div>
+      <div class="work-experience">
+        <h4>Experiencia laboral</h4>
+        <div v-for="(job, index) in profileData.workExperience" :key="index" class="job">
+          <h5>{{ job.title }}</h5>
+          <p>({{ job.period }})</p>
+          <p v-for="(responsibility, i) in job.responsibilities" :key="i">{{ responsibility }}</p>
+        </div>
+      </div>
+      <div class="download-cv">
+        <a href="/public/YubalCV.pdf" download>Descargar CV en PDF</a>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.aboutContainer {
+.about-container {
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+  gap: 3rem;
+  color: var(--text-color);
 }
-.profilePhotoContainer {
+
+.profile-photo-container {
   display: flex;
   flex-direction: column;
   gap: 3rem;
 }
-@media (min-width: 768px) {
-  .profilePhotoContainer {
-    flex-direction: row;
-    align-items: center;
-  }
-}
-.profilePhoto {
+
+.profile-photo {
   display: flex;
   justify-content: center;
 }
-.aboutMe {
+
+.about-me {
   display: flex;
   text-transform: uppercase;
 }
-.aboutMe h3,
-.aboutMe span {
+
+.about-me h3,
+.about-me span {
   display: block;
   font-size: 8rem;
   font-weight: bold;
+  color: var(--primary);
 }
-p {
-  font-size: 1.1em;
-  line-height: 1.6;
+
+.education,
+.tech-stack,
+.skills,
+.languages,
+.work-experience {
   margin-bottom: 3rem;
+}
+
+.education p,
+.languages p,
+.job p {
+  margin-bottom: 0;
+}
+
+.languages p,
+.languages a {
+  color: var(--text-color);
+}
+
+.work-experience p {
+  font-size: 1.3rem;
+}
+
+p {
+  margin-bottom: 3rem;
+}
+
+h4 {
+  margin-bottom: 1rem;
+  color: var(--heading);
+}
+
+h5 {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--subheading);
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.additional-info {
+  margin-top: 2rem;
+}
+
+.job {
+  margin-bottom: 2rem;
+}
+
+.download-cv {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+[data-theme='dark'] a:hover {
+  color: var(--highlight-dark);
+}
+
+[data-theme='light'] a:hover {
+  color: var(--highlight-light);
+}
+
+@media (min-width: 768px) {
+  .profile-photo-container {
+    flex-direction: row;
+    align-items: center;
+  }
 }
 </style>
 
@@ -844,79 +1216,83 @@ p {
 --- File: views\FooterView.vue ---
 
 <script setup>
-const currentYear = new Date().getFullYear()
+import { computed } from 'vue'
+const currentYear = computed(() => new Date().getFullYear())
 </script>
 
 <template>
-  <div class="footerContainer">
-    <div class="footerWrapper">
-      <div class="aboutSection">
-        <div class="aboutLink">
-          <RouterLink to="/about">
-            <a class="link">About</a>
-          </RouterLink>
-        </div>
-        <div class="linkedinLink">
-          <a href="https://www.linkedin.com/in/yubal-hormiga/" target="_blank">Linkedin</a>
-        </div>
-        <div class="githubLink">
-          <a href="https://github.com/YubalHormiga" target="_blank">GitHub</a>
-        </div>
+  <div class="footer-container">
+    <div class="footer-wrapper">
+      <div class="about-section">
+        <RouterLink to="/about" class="link">About</RouterLink>
+        <a
+          href="https://www.linkedin.com/in/yubal-hormiga/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link"
+        >
+          LinkedIn
+        </a>
+        <a
+          href="https://github.com/YubalHormiga"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link"
+        >
+          GitHub
+        </a>
       </div>
     </div>
-    <div class="footerCredit">
+    <div class="footer-credit">
       <h3>Yubal Hormiga {{ currentYear }}</h3>
     </div>
   </div>
 </template>
 
 <style scoped>
-.footerContainer {
+.footer-container {
+  width: 95%;
+  margin: 0 auto;
+  max-width: var(--max-width);
   display: flex;
   flex-direction: column;
   font-size: 2.4rem;
-  margin: 5rem 0 3rem 0;
-}
-@media (min-width: 768px) {
-  .footerContainer {
-    flex-direction: row;
-    justify-content: space-between;
-  }
+  margin-top: 3rem;
+  background-color: var(--background);
+  color: var(--text-color);
+  padding: 2rem;
+  border-top: 2px solid var(--primary);
 }
 
-.aboutSection {
+.about-section {
   display: flex;
-  flex-direction: column;
-  margin-bottom: 2rem;
   gap: 2rem;
+  justify-content: center;
+  margin-bottom: 2rem;
 }
-@media (min-width: 768px) {
-  .aboutSection {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-}
-.footerCredit h3 {
-  font-size: 2.4rem;
+
+.footer-credit h3 {
   display: flex;
-  gap: 0.5rem;
+  font-size: 2.4rem;
+  justify-content: center;
+  color: var(--primary);
 }
-.footerCredit h3::before {
+
+.footer-credit h3::before {
   content: '©';
   font-size: 3rem;
   margin-right: 0.5rem;
+  color: var(--primary);
 }
-.footerCredit {
-  margin-top: 3rem;
-}
+
 @media (min-width: 768px) {
-  .footerCredit {
-    margin-top: 0;
+  .footer-container {
+    flex-direction: row;
+    justify-content: space-between;
   }
-}
-a {
-  text-decoration: none;
+  .about-section {
+    align-items: center;
+  }
 }
 </style>
 

@@ -109,12 +109,12 @@ const goToPreviousProject = () => {
 }
 
 .project-title {
-  color: var(--primary);
+  color: var(--title-color); /* Title color based on theme */
 }
 
 .project-description {
   margin: 1rem 0;
-  color: var(--text-color);
+  color: var(--paragraph-color); /* Paragraph color based on theme */
 }
 
 .project-details-container {
@@ -152,8 +152,8 @@ const goToPreviousProject = () => {
 }
 
 .link-button {
-  background-color: var(--primary);
-  color: var(--text-color);
+  background-color: var(--button-color); /* Button color */
+  color: var(--button-text-color); /* Button text color */
   padding: 0.5rem 1rem;
   text-decoration: none;
   border-radius: 3px;
@@ -161,7 +161,7 @@ const goToPreviousProject = () => {
 }
 
 .link-button:hover {
-  background-color: var(--tertiary);
+  background-color: var(--tertiary); /* Hover color */
   color: var(--text-secondary);
 }
 
@@ -173,14 +173,14 @@ const goToPreviousProject = () => {
 
 h2 {
   text-align: center;
-  color: var(--primary);
+  color: var(--h2-color); /* Heading color for section titles */
   margin-bottom: 1rem;
 }
 
 h3 {
   margin-bottom: 1rem;
   font-weight: 500;
-  color: var(--text-color);
+  color: var(--h3-color); /* Color for subheadings */
 }
 
 .technology-list {
@@ -214,8 +214,8 @@ li {
 }
 
 .navigation-button {
-  background-color: var(--primary-dark);
-  color: var(--text-secondary);
+  background-color: var(--button-color); /* Button color */
+  color: var(--button-text-color); /* Button text color */
   padding: 0.5rem 1rem;
   border-radius: 3px;
   cursor: pointer;
@@ -226,7 +226,7 @@ li {
 }
 
 .navigation-button:hover {
-  background-color: var(--tertiary-dark);
+  background-color: var(--button-hover-color); /* Hover effect for navigation buttons */
 }
 
 @media (min-width: 768px) {
@@ -254,7 +254,7 @@ li {
   }
 
   .container-links {
-    flex: 1; /* Ocupa todo el ancho */
+    flex: 1;
     margin-top: 2rem;
   }
 

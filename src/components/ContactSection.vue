@@ -30,7 +30,6 @@
   font-size: 2rem;
   font-weight: 700;
   margin: 3rem 0;
-  color: var(--primary-dark);
 }
 
 .marginBottomSm {
