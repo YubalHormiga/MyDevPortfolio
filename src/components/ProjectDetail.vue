@@ -25,7 +25,12 @@ watch(
         <p class="project-description">{{ project.summary }}</p>
         <div class="project-details-container">
           <div class="image-container">
-            <img :src="project.image" alt="Imagen de {{ project.title }}" class="project-image" />
+            <img
+              :src="project.image"
+              alt="Imagen de {{ project.title }}"
+              class="project-image"
+              loading="lazy"
+            />
           </div>
           <div class="container-links">
             <div class="project-features">
