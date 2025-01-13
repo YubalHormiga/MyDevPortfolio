@@ -52,7 +52,7 @@ import profilePhoto from '@/assets/images/mi-foto.png'
         </div>
       </div>
       <div class="download-cv">
-        <a href="/public/YubalCV.pdf" download>Descargar CV en PDF</a>
+        <a href="/YubalCV.pdf" download>Descargar CV en PDF</a>
       </div>
     </div>
   </div>
