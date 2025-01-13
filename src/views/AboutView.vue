@@ -106,10 +106,14 @@ import profilePhoto from '@/assets/images/mi-foto.png'
 
 .languages p,
 .languages a {
-  color: var(--text-color);
+  color: var(--li-color);
 }
 
+.work-experience h5 {
+  font-size: 1.6rem;
+}
 .work-experience p {
+  color: var(--li-color);
 }
 
 p {

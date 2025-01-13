@@ -1,10 +1,10 @@
 <script setup>
-import { useRoute, useRouter } from 'vue-router'
-import { ref, watch, computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { ref, watch } from 'vue'
 import { projectDetails } from '../data/projectData'
+import ProjectNavegation from './ProjectNavegation.vue'
 
 const route = useRoute()
-const router = useRouter()
 
 const project = ref(projectDetails[route.params.projectName] || {})
 
@@ -14,22 +14,6 @@ watch(
     project.value = projectDetails[newProjectName] || {}
   },
 )
-
-const projectNames = Object.keys(projectDetails)
-
-const currentIndex = computed(() => {
-  return projectNames.indexOf(route.params.projectName)
-})
-
-const goToNextProject = () => {
-  const nextIndex = (currentIndex.value + 1) % projectNames.length
-  router.push({ name: 'project-detail', params: { projectName: projectNames[nextIndex] } })
-}
-
-const goToPreviousProject = () => {
-  const prevIndex = (currentIndex.value - 1 + projectNames.length) % projectNames.length
-  router.push({ name: 'project-detail', params: { projectName: projectNames[prevIndex] } })
-}
 </script>
 
 <template>
@@ -59,6 +43,23 @@ const goToPreviousProject = () => {
       </div>
     </div>
 
+    <div class="project-insights">
+      <h2>Retos enfrentados</h2>
+      <ul>
+        <li v-for="(challenge, index) in project.challenges" :key="index">{{ challenge }}</li>
+      </ul>
+
+      <h2>Soluciones encontradas</h2>
+      <ul>
+        <li v-for="(solution, index) in project.solutions" :key="index">{{ solution }}</li>
+      </ul>
+
+      <h2>Resultados</h2>
+      <ul>
+        <li v-for="(result, index) in project.results" :key="index">{{ result }}</li>
+      </ul>
+    </div>
+
     <div class="technologies">
       <h2>Tecnologías utilizadas</h2>
       <div class="technology-list">
@@ -76,27 +77,9 @@ const goToPreviousProject = () => {
         </div>
       </div>
     </div>
-
-    <div class="project-navigation">
-      <button @click="goToPreviousProject" class="navigation-button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-          <path
-            fill="currentColor"
-            d="m7.825 13l4.9 4.9q.3.3.288.7t-.313.7q-.3.275-.7.288t-.7-.288l-6.6-6.6q-.15-.15-.213-.325T4.426 12t.063-.375t.212-.325l6.6-6.6q.275-.275.688-.275t.712.275q.3.3.3.713t-.3.712L7.825 11H19q.425 0 .713.288T20 12t-.288.713T19 13z"
-          />
-        </svg>
-        Anterior
-      </button>
-      <button @click="goToNextProject" class="navigation-button">
-        Siguiente
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-          <path fill="currentColor" d="M16.175 13H4v-2h12.175l-5.6-5.6L12 4l8 8l-8 8l-1.425-1.4z" />
-        </svg>
-      </button>
-    </div>
+    <ProjectNavegation />
   </section>
 </template>
-
 <style scoped>
 .project-header {
   display: flex;
@@ -109,12 +92,12 @@ const goToPreviousProject = () => {
 }
 
 .project-title {
-  color: var(--title-color); /* Title color based on theme */
+  color: var(--title-color);
 }
 
 .project-description {
   margin: 1rem 0;
-  color: var(--paragraph-color); /* Paragraph color based on theme */
+  color: var(--paragraph-color);
 }
 
 .project-details-container {
@@ -152,8 +135,8 @@ const goToPreviousProject = () => {
 }
 
 .link-button {
-  background-color: var(--button-color); /* Button color */
-  color: var(--button-text-color); /* Button text color */
+  background-color: var(--button-color);
+  color: var(--button-text-color);
   padding: 0.5rem 1rem;
   text-decoration: none;
   border-radius: 3px;
@@ -161,7 +144,7 @@ const goToPreviousProject = () => {
 }
 
 .link-button:hover {
-  background-color: var(--tertiary); /* Hover color */
+  background-color: var(--tertiary);
   color: var(--text-secondary);
 }
 
@@ -173,14 +156,14 @@ const goToPreviousProject = () => {
 
 h2 {
   text-align: center;
-  color: var(--h2-color); /* Heading color for section titles */
+  color: var(--h2-color);
   margin-bottom: 1rem;
 }
 
 h3 {
   margin-bottom: 1rem;
   font-weight: 500;
-  color: var(--h3-color); /* Color for subheadings */
+  color: var(--h3-color);
 }
 
 .technology-list {
@@ -204,29 +187,6 @@ ul {
 li {
   margin-bottom: 0.5rem;
   text-align: center;
-}
-
-.project-navigation {
-  display: inline-flex;
-  justify-content: space-around;
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.navigation-button {
-  background-color: var(--button-color); /* Button color */
-  color: var(--button-text-color); /* Button text color */
-  padding: 0.5rem 1rem;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.navigation-button:hover {
-  background-color: var(--button-hover-color); /* Hover effect for navigation buttons */
 }
 
 @media (min-width: 768px) {

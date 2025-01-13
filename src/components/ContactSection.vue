@@ -28,7 +28,7 @@
   display: flex;
   align-items: center;
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 500;
   margin: 3rem 0;
 }
 

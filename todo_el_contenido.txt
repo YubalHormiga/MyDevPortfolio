@@ -1,6 +1,124 @@
 
 
---- File: App.vue ---
+--- File: .editorconfig ---
+(Skipped (non-matching extension))
+
+
+--- File: .git ---
+(Excluded)
+
+
+--- File: .gitignore ---
+(Excluded)
+
+
+--- File: .prettierrc.json ---
+
+{
+  "$schema": "https://json.schemastore.org/prettierrc",
+  "semi": false,
+  "singleQuote": true,
+  "printWidth": 100
+}
+
+
+--- File: .vscode\extensions.json ---
+
+{
+  "recommendations": [
+    "Vue.volar",
+    "dbaeumer.vscode-eslint",
+    "EditorConfig.EditorConfig",
+    "esbenp.prettier-vscode"
+  ]
+}
+
+
+
+--- File: .vscode\settings.json ---
+
+{
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "tsconfig.json": "tsconfig.*.json, env.d.ts",
+    "vite.config.*": "jsconfig*, vitest.config.*, cypress.config.*, playwright.config.*",
+    "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .eslint*, eslint*, .prettier*, prettier*, .editorconfig"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
+
+
+
+--- File: eslint.config.js ---
+
+import js from '@eslint/js'
+import pluginVue from 'eslint-plugin-vue'
+import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
+
+export default [
+  {
+    name: 'app/files-to-lint',
+    files: ['**/*.{js,mjs,jsx,vue}'],
+  },
+
+  {
+    name: 'app/files-to-ignore',
+    ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**'],
+  },
+
+  js.configs.recommended,
+  ...pluginVue.configs['flat/essential'],
+  skipFormatting,
+]
+
+
+
+--- File: index.html ---
+(Skipped (non-matching extension))
+
+
+--- File: jsconfig.json ---
+
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}
+
+
+
+--- File: node_modules ---
+(Excluded)
+
+
+--- File: package-lock.json ---
+(Excluded)
+
+
+--- File: package.json ---
+(Excluded)
+
+
+--- File: public\favicon.ico ---
+(Skipped (non-matching extension))
+
+
+--- File: public\YubalCV.pdf ---
+(Skipped (non-matching extension))
+
+
+--- File: README.md ---
+(Skipped (non-matching extension))
+
+
+--- File: src\App.vue ---
 
 <script setup>
 import { ref, onMounted, watch } from 'vue'
@@ -100,39 +218,39 @@ a:hover {
 
 
 
---- File: assets\icons\dark_mode.svg ---
+--- File: src\assets\icons\dark_mode.svg ---
 (Skipped (non-matching extension))
 
 
---- File: assets\icons\light_mode.svg ---
+--- File: src\assets\icons\light_mode.svg ---
 (Skipped (non-matching extension))
 
 
---- File: assets\images\canineConnect.webp ---
+--- File: src\assets\images\canineConnect.webp ---
 (Skipped (non-matching extension))
 
 
---- File: assets\images\favicon.png ---
+--- File: src\assets\images\favicon.png ---
 (Skipped (non-matching extension))
 
 
---- File: assets\images\mi-foto.png ---
+--- File: src\assets\images\mi-foto.png ---
 (Skipped (non-matching extension))
 
 
---- File: assets\images\techMix.webp ---
+--- File: src\assets\images\techMix.webp ---
 (Skipped (non-matching extension))
 
 
---- File: assets\images\waterSportWorld.webp ---
+--- File: src\assets\images\waterSportWorld.webp ---
 (Skipped (non-matching extension))
 
 
---- File: assets\main.css ---
+--- File: src\assets\main.css ---
 (Skipped (non-matching extension))
 
 
---- File: components\ContactSection.vue ---
+--- File: src\components\ContactSection.vue ---
 
 <template>
   <section class="InfoContainer">
@@ -179,7 +297,7 @@ a:hover {
 
 
 
---- File: components\HeroSection.vue ---
+--- File: src\components\HeroSection.vue ---
 
 <script setup></script>
 
@@ -250,7 +368,7 @@ a:hover {
 
 
 
---- File: components\NavigationBar.vue ---
+--- File: src\components\NavigationBar.vue ---
 
 <script setup>
 import { onMounted, ref } from 'vue'
@@ -414,7 +532,7 @@ nav {
 
 
 
---- File: components\ProjectDetail.vue ---
+--- File: src\components\ProjectDetail.vue ---
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
@@ -477,6 +595,25 @@ const goToPreviousProject = () => {
       </div>
     </div>
 
+    <!-- Nuevas Secciones -->
+    <div class="project-insights">
+      <h2>Retos enfrentados</h2>
+      <ul>
+        <li v-for="(challenge, index) in project.challenges" :key="index">{{ challenge }}</li>
+      </ul>
+
+      <h2>Soluciones encontradas</h2>
+      <ul>
+        <li v-for="(solution, index) in project.solutions" :key="index">{{ solution }}</li>
+      </ul>
+
+      <h2>Resultados</h2>
+      <ul>
+        <li v-for="(result, index) in project.results" :key="index">{{ result }}</li>
+      </ul>
+    </div>
+    <!-- Fin Nuevas Secciones -->
+
     <div class="technologies">
       <h2>Tecnologías utilizadas</h2>
       <div class="technology-list">
@@ -514,7 +651,6 @@ const goToPreviousProject = () => {
     </div>
   </section>
 </template>
-
 <style scoped>
 .project-header {
   display: flex;
@@ -689,7 +825,7 @@ li {
 
 
 
---- File: components\ProjectOverviewSection.vue ---
+--- File: src\components\ProjectOverviewSection.vue ---
 
 <script setup>
 import { ref } from 'vue'
@@ -740,6 +876,7 @@ const projects = ref(projectListData)
 .section-title {
   font-family: 'Wendy One', serif;
   letter-spacing: 2px;
+  color: var(--text-color);
 }
 
 @media (max-width: 1200px) {
@@ -756,7 +893,7 @@ const projects = ref(projectListData)
   cursor: pointer;
   font-family: 'Wendy One', serif;
   margin-bottom: 0.5rem;
-  color: var(--title-color);
+  color: var(--button-color);
   transition: color 0.3s ease;
   padding-left: 3px;
 }
@@ -774,7 +911,7 @@ const projects = ref(projectListData)
 
 
 
---- File: components\ThemeTogle.vue ---
+--- File: src\components\ThemeTogle.vue ---
 
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue'
@@ -821,7 +958,7 @@ img {
 
 
 
---- File: data\profileData.js ---
+--- File: src\data\profileData.js ---
 
 export const profileData = {
   bio: [
@@ -830,9 +967,9 @@ export const profileData = {
     `Estoy buscando un puesto como desarrollador web junior donde pueda aplicar mis conocimientos técnicos y mi experiencia en gestión para impulsar proyectos innovadores. Mi objetivo es contribuir con mis habilidades y seguir creciendo en el fascinante mundo de la programación.`,
   ],
   education: [
-    `Full Stack Web Developer, Neoland - Developer Bootcamp (Septiembre 2022 – Diciembre 2022)`,
-    `Grado Medio en Sistemas Microinformáticos y Redes, FP Ilerna Online (2020 – 2022)`,
-    `Diplomado en Dirección y Administración de Empresas, Escuela de Negocios M.B.A (1998 – 2002)`,
+    `-Full Stack Web Developer, Neoland - Developer Bootcamp (Septiembre 2022 – Diciembre 2022)`,
+    `-Grado Medio en Sistemas Microinformáticos y Redes, FP Ilerna Online (2020 – 2022)`,
+    `-Diplomado en Dirección y Administración de Empresas, Escuela de Negocios M.B.A (1998 – 2002)`,
   ],
   techStack: [
     'HTML5',
@@ -891,7 +1028,7 @@ export const profileData = {
 
 
 
---- File: data\projectData.js ---
+--- File: src\data\projectData.js ---
 
 import canineConnectImage from '@/assets/images/canineConnect.webp'
 import waterSportWorldImage from '@/assets/images/waterSportWorld.webp'
@@ -900,69 +1037,101 @@ import techMixImage from '@/assets/images/techMix.webp'
 export const projectDetails = {
   canineconnect: {
     title: 'CanineConnect 🐶',
-    description: `CanineConnect es una plataforma web diseñada para facilitar la conexión entre amantes de los perros, refugios y protectoras. Esta aplicación ofrece funcionalidades para gestionar adopciones, reportar mascotas perdidas, compartir historias inspiradoras y mucho más.`,
+    description: `Una plataforma diseñada para amantes de los perros, refugios y protectoras, que digitaliza y simplifica procesos relacionados con adopciones y reportes de mascotas perdidas.`,
     summary:
-      'Una comunidad en línea dedicada al bienestar animal, mejorando los procesos de adopción y rescate de perros.',
+      'Crea una comunidad conectada dedicada al bienestar animal, con herramientas modernas para mejorar procesos de adopción y rescate.',
     features: [
-      'Reportes de mascotas perdidas y encontradas',
-      'Gestión de usuarios y roles',
-      'Historias inspiradoras',
-      'Chat en tiempo real',
-      'Adopción de perros',
+      'Gestión de adopciones con perfiles detallados de perros.',
+      'Reportes de mascotas perdidas/encontradas con geolocalización.',
+      'Historias inspiradoras para fomentar la interacción de la comunidad.',
+      'Chat en tiempo real para facilitar la comunicación entre usuarios y refugios.',
+      'Panel administrativo para gestionar roles y publicaciones.',
     ],
     technologies: {
       frontend: ['Vue.js', 'Pinia', 'Vue Router', 'CSS'],
-      backend: ['Firebase', 'The Dog API'],
+      backend: ['Firebase (Authentication, Firestore, Storage)', 'The Dog API'],
     },
     liveLink: 'https://canine-connect.netlify.app/',
     githubLink: 'https://github.com/YubalHormiga/Proyectos-Personales/tree/main/05_CanineConnect',
     image: canineConnectImage,
+    challenges: [
+      'Diseñar un sistema eficiente para gestionar grandes volúmenes de datos sobre adopciones y mascotas perdidas.',
+      'Implementar un chat en tiempo real de manera fluida para múltiples usuarios.',
+    ],
+    solutions: [
+      'Utilización de Firebase para aprovechar su capacidad de escalabilidad y funciones en tiempo real.',
+      'Diseño modular del frontend con Vue.js para garantizar una experiencia de usuario fluida.',
+    ],
+    results: [
+      'Proyecto diseñado para facilitar la adopción de perros, destacando por su estructura robusta y su experiencia de usuario optimizada.',
+    ],
   },
   watersportworld: {
     title: 'WaterSportWorld 🌊',
-    description: `WaterSportWorld es una aplicación integral para gestionar reservas de actividades acuáticas. Con un backend robusto en Node.js y un frontend dinámico en Vue.js, los usuarios pueden reservar actividades de deportes acuáticos de manera sencilla y segura.`,
+    description: `Un sistema de reservas online para deportes acuáticos, diseñado para usuarios y administradores, con un flujo sencillo y seguro.`,
     summary:
-      'Gestión de reservas de deportes acuáticos con una experiencia fluida tanto para el usuario como para el administrador.',
+      'Optimiza la gestión de actividades acuáticas mediante un sistema intuitivo y eficaz para reservas y administración.',
     features: [
-      'Reservas interactivas con selección de actividades',
-      'Navegación intuitiva entre secciones clave',
-      'Visualización de información de usuario',
-      'Registro e inicio de sesión seguro',
-      'Gestión de servicios acuáticos',
+      'Reservas interactivas con selección de actividades.',
+      'Navegación intuitiva entre las principales secciones.',
+      'Gestión de usuarios y registro seguro.',
+      'Panel administrativo para servicios y actividades.',
     ],
     technologies: {
-      frontend: ['Vue.js', 'Pinia', 'Vue Router', 'CSS', 'PrimeVue', 'SweetAlert2'],
-      backend: ['Node.js', 'Express', 'MongoDB', 'Mongoose', 'JWT', 'Nodemailer'],
+      frontend: ['Vue.js', 'PrimeVue', 'SweetAlert2', 'CSS'],
+      backend: ['Node.js', 'Express', 'MongoDB', 'JWT', 'Nodemailer'],
     },
     liveLink: 'https://www.youtube.com/watch?v=Bje2UZDSICU',
     githubLink: 'https://github.com/YubalHormiga/Proyectos-Personales/tree/main/04_WaterSportWorld',
     image: waterSportWorldImage,
+    challenges: [
+      'Diseñar un flujo de reservas intuitivo que permita a los usuarios seleccionar actividades y horarios con facilidad.',
+      'Asegurar el manejo eficiente de datos de usuarios y reservas.',
+    ],
+    solutions: [
+      'Implementación de MongoDB y Mongoose para una gestión óptima de los datos.',
+      'Utilización de PrimeVue para mejorar la interfaz con componentes ricos e interactivos.',
+    ],
+    results: [
+      'Flujo de reservas optimizado para garantizar una experiencia intuitiva y eficiente.',
+      'Sistema seguro y preparado para ser escalado en entornos reales.',
+    ],
   },
   techmix: {
     title: 'TechMix Projects 💻',
-    description: `TechMix es una colección de proyectos prácticos enfocados en aprender y dominar Vue.js. Con una estructura modular, cada proyecto tiene como objetivo mejorar las habilidades clave en el desarrollo web, utilizando Vue.js y otras herramientas modernas.`,
+    description: `Un conjunto de proyectos prácticos diseñados para aprender y dominar Vue.js, desde conceptos básicos hasta técnicas avanzadas.`,
     summary:
-      'Proyectos progresivos para reforzar el aprendizaje de Vue.js y mejorar las habilidades en desarrollo web.',
+      'Proyectos educativos que combinan diseño modular y enfoque progresivo para el aprendizaje de herramientas modernas.',
     features: [
-      'Desarrollo con herramientas modernas como Vite, Tailwind CSS y ESLint',
-      'Ejercicios lógicos y pruebas técnicas',
-      'Proyectos enfocados en Vue.js',
-      'Optimización de rendimiento',
-      'Diseño modular y escalable',
+      'Ejercicios técnicos y pruebas para desarrollar lógica de programación.',
+      'Uso de herramientas modernas como Vite, Tailwind CSS y ESLint.',
+      'Proyectos orientados a optimizar el rendimiento y la modularidad del código.',
     ],
     technologies: {
       frontend: ['Vue.js', 'Tailwind CSS', 'Vite', 'ESLint', 'Prettier'],
-      backend: ['Se planea integrar backend en el futuro.'],
+      backend: ['Planeado para futuras integraciones.'],
     },
     liveLink: 'https://techmixhub.netlify.app/',
     githubLink: 'https://github.com/YubalHormiga/TechMix',
     image: techMixImage,
+    challenges: [
+      'Diseñar proyectos educativos que combinen teoría y práctica en un flujo lógico.',
+      'Optimizar la estructura del código para escalar y reutilizar componentes.',
+    ],
+    solutions: [
+      'Uso de Tailwind CSS para acelerar el diseño y lograr estilos consistentes.',
+      'Integración de ESLint y Prettier para mantener un código limpio y estándar.',
+    ],
+    results: [
+      'Colección de proyectos educativos preparados para guiar a otros desarrolladores en su aprendizaje de Vue.js.',
+      'Estructura modular y organizada que facilita la comprensión y el uso del código.',
+    ],
   },
 }
 
 
 
---- File: data\projectListData.js ---
+--- File: src\data\projectListData.js ---
 
 export const projectListData = [
   {
@@ -986,7 +1155,7 @@ export const projectListData = [
 
 
 
---- File: main.js ---
+--- File: src\main.js ---
 
 import './assets/main.css'
 
@@ -1002,7 +1171,7 @@ app.mount('#app')
 
 
 
---- File: router\index.js ---
+--- File: src\router\index.js ---
 
 import { createRouter, createWebHistory } from 'vue-router'
 import HeroSection from '../components/HeroSection.vue'
@@ -1036,11 +1205,7 @@ export default router
 
 
 
---- File: todo_el_contenido.txt ---
-(Skipped (non-matching extension))
-
-
---- File: views\AboutView.vue ---
+--- File: src\views\AboutView.vue ---
 
 <script setup>
 import { profileData } from '@/data/profileData.js'
@@ -1154,7 +1319,6 @@ import profilePhoto from '@/assets/images/mi-foto.png'
 }
 
 .work-experience p {
-  font-size: 1.3rem;
 }
 
 p {
@@ -1213,7 +1377,7 @@ a {
 
 
 
---- File: views\FooterView.vue ---
+--- File: src\views\FooterView.vue ---
 
 <script setup>
 import { computed } from 'vue'
@@ -1298,7 +1462,7 @@ const currentYear = computed(() => new Date().getFullYear())
 
 
 
---- File: views\MainView.vue ---
+--- File: src\views\MainView.vue ---
 
 <script setup>
 import ProjectOverviewSection from '@/components/ProjectOverviewSection.vue'
@@ -1308,4 +1472,31 @@ import ProjectOverviewSection from '@/components/ProjectOverviewSection.vue'
   <ProjectOverviewSection />
 </template>
 <style scoped></style>
+
+
+
+--- File: todo_el_contenido.txt ---
+(Skipped (non-matching extension))
+
+
+--- File: vite.config.js ---
+
+import { fileURLToPath, URL } from 'node:url'
+
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import vueDevTools from 'vite-plugin-vue-devtools'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [
+    vue(),
+    vueDevTools(),
+  ],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    },
+  },
+})
 

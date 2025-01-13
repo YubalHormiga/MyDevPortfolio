@@ -58,7 +58,6 @@
     --h2-color: var(--h2-color-dark);
     --h3-color: var(--h3-color-dark);
 
-    /* Aplicado a li en dark */
     --li-color: var(--li-color-dark);
     --li-hover-color: var(--li-hover-color-dark);
 }
