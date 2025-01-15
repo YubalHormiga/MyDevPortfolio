@@ -1,0 +1,1380 @@
+
+
+--- File: App.vue ---
+
+<script setup>
+import { ref, onMounted, watch } from 'vue'
+import { RouterView, useRoute } from 'vue-router'
+import NavigationBar from './components/NavigationBar.vue'
+import FooterView from './views/FooterView.vue'
+import MainView from './views/MainView.vue'
+
+const route = useRoute()
+
+const hasScrolled = ref(false)
+
+const handleScroll = () => {
+  if (window.scrollY > 100) {
+    hasScrolled.value = true
+  }
+}
+watch(route, () => {
+  window.scrollTo(0, 0)
+})
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+</script>
+
+<template>
+  <header class="header">
+    <NavigationBar />
+  </header>
+  <div class="container">
+    <Transition name="slide-left">
+      <RouterView />
+    </Transition>
+    <div v-show="!hasScrolled" class="spacer"></div>
+
+    <Transition name="slide-left">
+      <main v-if="route.name === 'home' && hasScrolled" class="main">
+        <MainView />
+      </main>
+    </Transition>
+  </div>
+  <footer v-if="hasScrolled" class="footer">
+    <FooterView />
+  </footer>
+</template>
+
+<style scoped>
+.header,
+.footer {
+  width: 95%;
+  margin: 0 auto;
+  max-width: var(--max-width);
+}
+
+.container {
+  display: grid;
+  min-height: 100dvh;
+  grid-template-rows: auto 1fr auto;
+  overflow-y: hidden;
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: transform 1s ease-out;
+}
+
+.slide-left-enter-from {
+  transform: translateX(-100%);
+}
+
+.slide-left-enter-to {
+  transform: translateX(0);
+}
+
+.slide-left-leave-from {
+  transform: translateX(0);
+}
+
+.slide-left-leave-to {
+  transform: translateX(-100%);
+}
+
+.spacer {
+  height: 100rem;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary);
+}
+
+a:hover {
+  color: var(--highlight);
+}
+</style>
+
+
+
+--- File: assets\icons\dark_mode.svg ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\icons\light_mode.svg ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\images\canineConnect.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\images\favicon.png ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\images\mi-foto.png ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\images\techMix.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\images\waterSportWorld.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\main.css ---
+(Skipped (non-matching extension))
+
+
+--- File: components\ContactSection.vue ---
+
+<template>
+  <section class="InfoContainer">
+    <div class="contactInfo">
+      <h3>¿Estás buscando un desarrollador junior para tu equipo?</h3>
+      <p>
+        Soy un desarrollador junior buscando mi primer empleo en el mundo del desarrollo web. Si
+        tienes un proyecto en mente o crees que puedo ser útil, ¡hablemos!
+      </p>
+      <a href="mailto:yubalhh@gmail.com" class="emailLink">yubalhh@gmail.com</a>
+    </div>
+  </section>
+</template>
+
+<style scoped>
+.InfoContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 5rem 0 0 0;
+}
+
+.contactInfo h3 {
+  font-weight: 100;
+  margin-bottom: 1.5rem;
+}
+
+.emailLink {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 3rem 0;
+}
+
+.marginBottomSm {
+  margin-bottom: 8px;
+}
+
+.marginBottomLg {
+  margin-bottom: 16px;
+}
+</style>
+
+
+
+--- File: components\HeroSection.vue ---
+
+<template>
+  <div class="hero-section">
+    <h1 class="hero-title">
+      <span class="hero-title-name">Hi! I’m <span>Yubal</span>,</span>
+      <span class="hero-title-role">
+        a Junior Full Stack <br />
+        Web Developer
+      </span>
+    </h1>
+  </div>
+</template>
+
+<style scoped>
+.hero-section {
+  margin-top: 5rem;
+  text-align: left;
+  padding-left: 4px;
+  font-family: 'Bangers', serif;
+  letter-spacing: 3px;
+}
+
+.hero-title {
+  font-size: 8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-title-name,
+.hero-title-role {
+  display: block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s forwards;
+}
+
+.hero-title-name {
+  animation-delay: 0.2s;
+}
+.hero-title-name span {
+  color: var(--text-color);
+}
+
+.hero-title-role {
+  animation-delay: 0.5s;
+}
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 4rem;
+  }
+  .hero-section {
+    display: flex;
+  }
+}
+</style>
+
+
+
+--- File: components\NavigationBar.vue ---
+
+<script setup>
+import { onMounted, ref } from 'vue'
+import ThemeToggle from './ThemeTogle.vue'
+
+const emailVisible = ref(false)
+const copiedMessageVisible = ref(false)
+const navVisible = ref(false)
+
+const copyEmail = () => {
+  navigator.clipboard.writeText('yubalhh@gmail.com')
+  copiedMessageVisible.value = true
+  setTimeout(() => {
+    copiedMessageVisible.value = false
+  }, 2000)
+}
+
+onMounted(() => {
+  navVisible.value = true
+})
+</script>
+
+<template>
+  <Transition name="fade-scale" mode="out-in">
+    <nav v-if="navVisible">
+      <div class="logo">
+        <RouterLink to="/">
+          <span class="letter y">Y</span>
+          <span class="letter h1">H</span>
+          <span class="letter h2">H</span>
+        </RouterLink>
+      </div>
+
+      <div class="ready-work" @mouseenter="emailVisible = true" @mouseleave="emailVisible = false">
+        <span v-if="!emailVisible" class="fade-text">Ready to work!</span>
+        <span v-else class="email fade-text" @click="copyEmail"> yubalhh@gmail.com </span>
+        <Transition name="fade-opacity">
+          <div v-if="copiedMessageVisible" class="copied-message">Copied!</div>
+        </Transition>
+      </div>
+
+      <div>
+        <ThemeToggle />
+      </div>
+    </nav>
+  </Transition>
+</template>
+
+<style scoped>
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0;
+  font-family: 'Bangers', serif;
+  letter-spacing: 3px;
+  padding: 0 0 0 3px;
+}
+
+.logo {
+  position: relative;
+  font-weight: 900;
+  font-size: 5rem;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.letter {
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.y {
+  z-index: 1;
+}
+
+.h1 {
+  position: absolute;
+  left: 1.8rem;
+  top: 0;
+  z-index: 2;
+}
+
+.h2 {
+  position: absolute;
+  left: 3rem;
+  top: 0;
+  z-index: 3;
+}
+
+.ready-work {
+  display: flex;
+  gap: 1rem;
+  cursor: pointer;
+  padding: 1rem;
+  font-weight: 700;
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .ready-work {
+    display: none;
+  }
+}
+
+.ready-work:hover {
+  transform: scale(1.05);
+}
+
+.copied-message {
+  margin-left: 2rem;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  opacity: 1;
+  transform: scale(1);
+  color: var(--copied-message-color);
+}
+
+.copied-message:leave {
+  opacity: 0;
+  transform: scale(0.8);
+}
+.fade-scale-enter-active,
+.fade-scale-leave-active {
+  transition:
+    opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1),
+    transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.fade-scale-enter-from,
+.fade-scale-leave-to {
+  opacity: 0;
+  transform: scale(0.3);
+}
+
+.fade-opacity-enter-active,
+.fade-opacity-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-opacity-enter-from,
+.fade-opacity-leave-to {
+  opacity: 0;
+}
+
+.fade-text {
+  display: inline-block;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.fade-text:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+</style>
+
+
+
+--- File: components\ProjectDetail.vue ---
+
+<script setup>
+import { useRoute } from 'vue-router'
+import { ref, watch } from 'vue'
+import { projectDetails } from '../data/projectData'
+import ProjectNavegation from './ProjectNavegation.vue'
+
+const route = useRoute()
+
+const project = ref(projectDetails[route.params.projectName] || {})
+
+watch(
+  () => route.params.projectName,
+  (newProjectName) => {
+    project.value = projectDetails[newProjectName] || {}
+  },
+)
+</script>
+
+<template>
+  <section class="container">
+    <div class="project-header">
+      <div class="project-info">
+        <h1 class="project-title">{{ project.title }}</h1>
+        <p class="project-description">{{ project.description }}</p>
+        <p class="project-description">{{ project.summary }}</p>
+        <div class="project-details-container">
+          <div class="image-container">
+            <img
+              :src="project.image"
+              alt="Imagen de {{ project.title }}"
+              class="project-image"
+              loading="lazy"
+            />
+          </div>
+          <div class="container-links">
+            <div class="project-features">
+              <h2>Características Principales</h2>
+              <ul>
+                <li v-for="(feature, index) in project.features" :key="index">{{ feature }}</li>
+              </ul>
+            </div>
+            <div class="project-links">
+              <a :href="project.liveLink" target="_blank" class="link-button">Explorar</a>
+              <a :href="project.githubLink" target="_blank" class="link-button">GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-insights">
+      <h2>Retos enfrentados</h2>
+      <ul>
+        <li v-for="(challenge, index) in project.challenges" :key="index">{{ challenge }}</li>
+      </ul>
+
+      <h2>Soluciones encontradas</h2>
+      <ul>
+        <li v-for="(solution, index) in project.solutions" :key="index">{{ solution }}</li>
+      </ul>
+
+      <h2>Resultados</h2>
+      <ul>
+        <li v-for="(result, index) in project.results" :key="index">{{ result }}</li>
+      </ul>
+    </div>
+
+    <div class="technologies">
+      <h2>Tecnologías utilizadas</h2>
+      <div class="technology-list">
+        <div>
+          <h3>Frontend:</h3>
+          <ul>
+            <li v-for="tech in project.technologies.frontend" :key="tech">{{ tech }}</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Backend:</h3>
+          <ul>
+            <li v-for="tech in project.technologies.backend" :key="tech">{{ tech }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <ProjectNavegation />
+  </section>
+</template>
+<style scoped>
+.project-header {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.project-info {
+  flex: 1;
+}
+
+.project-title {
+  color: var(--title-color);
+}
+
+.project-description {
+  margin: 1rem 0;
+  color: var(--paragraph-color);
+}
+
+.project-details-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.container-links {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.project-image {
+  width: 100%;
+  height: auto;
+  max-height: 40rem;
+  border-radius: 10px;
+}
+
+.project-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.project-links {
+  display: flex;
+  justify-content: space-around;
+}
+
+.link-button {
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.link-button:hover {
+  background-color: var(--button-hover-color);
+  color: var(--text-secondary);
+}
+
+.technologies {
+  margin-top: 1rem;
+  padding: 0 2rem;
+  color: var(--text-color);
+}
+
+h2 {
+  text-align: center;
+  color: var(--h2-color);
+  margin-bottom: 1rem;
+}
+
+h3 {
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: var(--h3-color);
+}
+
+.technology-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.technology-list div {
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .project-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .project-info {
+    margin-top: 1rem;
+  }
+
+  .project-description {
+    text-align: justify;
+  }
+
+  .project-details-container {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .image-container {
+    flex: 2;
+    max-width: 100%;
+  }
+
+  .container-links {
+    flex: 1;
+    margin-top: 2rem;
+  }
+
+  .technology-list {
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  .technology-list div {
+    width: 100%;
+  }
+}
+</style>
+
+
+
+--- File: components\ProjectNavegation.vue ---
+
+<script setup>
+import { computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { projectDetails } from '../data/projectData'
+
+const router = useRouter()
+const route = useRoute()
+
+const projectNames = Object.keys(projectDetails)
+const currentIndex = computed(() => projectNames.indexOf(route.params.projectName))
+
+const goToPreviousProject = () => {
+  const prevIndex = (currentIndex.value - 1 + projectNames.length) % projectNames.length
+  router.push({ name: 'project-detail', params: { projectName: projectNames[prevIndex] } })
+}
+
+const goToNextProject = () => {
+  const nextIndex = (currentIndex.value + 1) % projectNames.length
+  router.push({ name: 'project-detail', params: { projectName: projectNames[nextIndex] } })
+}
+</script>
+
+<template>
+  <div class="project-navigation">
+    <button @click="goToPreviousProject" class="navigation-button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+        <path
+          fill="currentColor"
+          d="m7.825 13l4.9 4.9q.3.3.288.7t-.313.7q-.3.275-.7.288t-.7-.288l-6.6-6.6q-.15-.15-.213-.325T4.426 12t.063-.375t.212-.325l6.6-6.6q.275-.275.688-.275t.712.275q.3.3.3.713t-.3.712L7.825 11H19q.425 0 .713.288T20 12t-.288.713T19 13z"
+        />
+      </svg>
+      Anterior
+    </button>
+    <button @click="goToNextProject" class="navigation-button">
+      Siguiente
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M16.175 13H4v-2h12.175l-5.6-5.6L12 4l8 8l-8 8l-1.425-1.4z" />
+      </svg>
+    </button>
+  </div>
+</template>
+
+<style scoped>
+.project-navigation {
+  display: inline-flex;
+  justify-content: space-around;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.navigation-button {
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navigation-button:hover {
+  background-color: var(--button-hover-color);
+}
+</style>
+
+
+
+--- File: components\ProjectOverviewSection.vue ---
+
+<script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { projectListData } from '../data/projectListData'
+import ContactSection from './ContactSection.vue'
+
+const router = useRouter()
+
+const navigateToProject = (projectName) => {
+  router.push({ path: '/project/' + projectName })
+}
+
+const projects = ref(projectListData)
+</script>
+
+<template>
+  <section class="projects-section compact-padding">
+    <h2 class="section-title">Proyectos</h2>
+    <h2 class="section-title details">Detalles</h2>
+  </section>
+
+  <section v-for="project in projects" :key="project.name" class="projects-section">
+    <h2 class="project-title" @click="navigateToProject(project.name)">{{ project.title }}</h2>
+    <div class="project-description">
+      <p>{{ project.description }}</p>
+    </div>
+  </section>
+
+  <ContactSection />
+</template>
+
+<style scoped>
+.projects-section {
+  display: grid;
+  grid-template-columns: 5fr 4fr;
+  padding: 4rem 0;
+  align-items: center;
+  gap: 2rem;
+  border-bottom: 2px solid var(--secondary);
+  margin: 0 auto;
+}
+
+.projects-section.compact-padding {
+  padding: 3rem 0 2rem 0;
+}
+
+.section-title {
+  font-family: 'Wendy One', serif;
+  letter-spacing: 2px;
+  color: var(--text-color);
+}
+
+@media (max-width: 1200px) {
+  .projects-section {
+    grid-template-columns: 1fr;
+  }
+  .details {
+    display: none;
+  }
+}
+
+.project-title {
+  font-size: 7rem;
+  cursor: pointer;
+  font-family: 'Wendy One', serif;
+  margin-bottom: 0.5rem;
+  color: var(--button-color);
+  transition: color 0.3s ease;
+  padding-left: 3px;
+}
+
+.project-title:hover {
+  color: var(--title-hover-color);
+}
+
+@media (max-width: 768px) {
+  .project-title {
+    font-size: 4rem;
+  }
+}
+</style>
+
+
+
+--- File: components\ThemeTogle.vue ---
+
+<script setup>
+import { ref, onMounted, computed, watch } from 'vue'
+import darkModeIcon from '@/assets/icons/dark_mode.svg'
+import lightModeIcon from '@/assets/icons/light_mode.svg'
+
+const isDarkMode = ref(localStorage.getItem('theme') !== 'light')
+
+const themeIcon = computed(() => (isDarkMode.value ? darkModeIcon : lightModeIcon))
+
+const toggleTheme = () => {
+  isDarkMode.value = !isDarkMode.value
+}
+
+watch(isDarkMode, (newValue) => {
+  const theme = newValue ? 'dark' : 'light'
+  document.documentElement.setAttribute('data-theme', theme)
+  localStorage.setItem('theme', theme)
+})
+
+onMounted(() => {
+  document.documentElement.setAttribute('data-theme', isDarkMode.value ? 'dark' : 'light')
+})
+</script>
+
+<template>
+  <button @click="toggleTheme" aria-label="Toggle Theme" aria-live="polite">
+    <img :src="themeIcon" alt="Theme Icon" />
+  </button>
+</template>
+
+<style scoped>
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+img {
+  width: 44px;
+  height: 24px;
+}
+</style>
+
+
+
+--- File: data\profileData.js ---
+
+export const profileData = {
+  bio: [
+    `Soy Yubal Hormiga, un apasionado desarrollador web Full Stack con un enfoque constante en la mejora continua y el aprendizaje. Después de completar un bootcamp intensivo en desarrollo web en NEOLAND, he adquirido sólidas habilidades en tecnologías fundamentales como HTML5, CSS3, JavaScript, Vue.js, Node.js y MongoDB.`,
+    `Mi experiencia previa en análisis de datos, gestión de proyectos y atención al cliente me ha permitido desarrollar una notable capacidad para resolver problemas, pensar de manera crítica y colaborar eficazmente. He demostrado ser una persona responsable, adaptable y proactiva, comprometida con ofrecer soluciones tecnológicas eficientes y escalables.`,
+    `Estoy buscando un puesto como desarrollador web junior donde pueda aplicar mis conocimientos técnicos y mi experiencia en gestión para impulsar proyectos innovadores. Mi objetivo es contribuir con mis habilidades y seguir creciendo en el fascinante mundo de la programación.`,
+  ],
+  education: [
+    `-Full Stack Web Developer, Neoland - Developer Bootcamp (Septiembre 2022 – Diciembre 2022)`,
+    `-Grado Medio en Sistemas Microinformáticos y Redes, FP Ilerna Online (2020 – 2022)`,
+    `-Diplomado en Dirección y Administración de Empresas, Escuela de Negocios M.B.A (1998 – 2002)`,
+  ],
+  techStack: [
+    'HTML5',
+    'CSS3',
+    'Tailwind',
+    'JavaScript',
+    'Vue.js',
+    'Node.js',
+    'Express.js',
+    'MongoDB',
+    'Firebase',
+    'Git',
+  ],
+  skills: [
+    'Pensamiento crítico',
+    'Aptitud positiva',
+    'Resiliente',
+    'Capacidad de planificación y organización',
+    'Persona proactiva',
+    'Compromiso con el trabajo',
+  ],
+  languages: {
+    spanish: 'Nativo',
+    english: 'B1-B2 EF SET, Febrero 2023',
+  },
+  workExperience: [
+    {
+      title: 'Nautalia Viajes - Agente de viajes',
+      period: 'Febrero 2019 – Mayo 2020',
+      responsibilities: [
+        'Análisis de datos para mejorar estrategias de marketing.',
+        'Resolución de problemas complejos de itinerarios.',
+        'Comunicación efectiva y atención al cliente.',
+      ],
+    },
+    {
+      title: 'Formiga Tours - Administrador solidario',
+      period: 'Junio 2013 – Diciembre 2018',
+      responsibilities: [
+        'Coordinación de proyectos de viajes.',
+        'Colaboración con equipos diversos.',
+        'Adaptabilidad a cambios del mercado.',
+      ],
+    },
+    {
+      title: 'Orizonia - Agente de viajes',
+      period: 'Abril 2006 - Febrero 2013',
+      responsibilities: [
+        'Ventas, asesoramiento y gestión para empresas y particulares.',
+        'Servicio al cliente.',
+        'Gestión y actualización de contenidos web.',
+      ],
+    },
+  ],
+}
+
+
+
+--- File: data\projectData.js ---
+
+import canineConnectImage from '@/assets/images/canineConnect.webp'
+import waterSportWorldImage from '@/assets/images/waterSportWorld.webp'
+import techMixImage from '@/assets/images/techMix.webp'
+
+export const projectDetails = {
+  canineconnect: {
+    title: 'CanineConnect 🐶',
+    description: `Una plataforma diseñada para amantes de los perros, refugios y protectoras, que digitaliza y simplifica procesos relacionados con adopciones y reportes de mascotas perdidas.`,
+    summary:
+      'Crea una comunidad conectada dedicada al bienestar animal, con herramientas modernas para mejorar procesos de adopción y rescate.',
+    features: [
+      'Gestión de adopciones con perfiles detallados de perros.',
+      'Reportes de mascotas perdidas/encontradas con geolocalización.',
+      'Historias inspiradoras para fomentar la interacción de la comunidad.',
+      'Chat en tiempo real para facilitar la comunicación entre usuarios y refugios.',
+      'Panel administrativo para gestionar roles y publicaciones.',
+    ],
+    technologies: {
+      frontend: ['Vue.js', 'Pinia', 'Vue Router', 'CSS'],
+      backend: ['Firebase (Authentication, Firestore, Storage)', 'The Dog API'],
+    },
+    liveLink: 'https://canine-connect.netlify.app/',
+    githubLink: 'https://github.com/YubalHormiga/Proyectos-Personales/tree/main/05_CanineConnect',
+    image: canineConnectImage,
+    challenges: [
+      'Diseñar un sistema eficiente para gestionar grandes volúmenes de datos sobre adopciones y mascotas perdidas.',
+      'Implementar un chat en tiempo real de manera fluida para múltiples usuarios.',
+    ],
+    solutions: [
+      'Utilización de Firebase para aprovechar su capacidad de escalabilidad y funciones en tiempo real.',
+      'Diseño modular del frontend con Vue.js para garantizar una experiencia de usuario fluida.',
+    ],
+    results: [
+      'Proyecto diseñado para facilitar la adopción de perros, destacando por su estructura robusta y su experiencia de usuario optimizada.',
+    ],
+  },
+  watersportworld: {
+    title: 'WaterSportWorld 🌊',
+    description: `Un sistema de reservas online para deportes acuáticos, diseñado para usuarios y administradores, con un flujo sencillo y seguro.`,
+    summary:
+      'Optimiza la gestión de actividades acuáticas mediante un sistema intuitivo y eficaz para reservas y administración.',
+    features: [
+      'Reservas interactivas con selección de actividades.',
+      'Navegación intuitiva entre las principales secciones.',
+      'Gestión de usuarios y registro seguro.',
+      'Panel administrativo para servicios y actividades.',
+    ],
+    technologies: {
+      frontend: ['Vue.js', 'PrimeVue', 'SweetAlert2', 'CSS'],
+      backend: ['Node.js', 'Express', 'MongoDB', 'JWT', 'Nodemailer'],
+    },
+    liveLink: 'https://www.youtube.com/watch?v=Bje2UZDSICU',
+    githubLink: 'https://github.com/YubalHormiga/Proyectos-Personales/tree/main/04_WaterSportWorld',
+    image: waterSportWorldImage,
+    challenges: [
+      'Diseñar un flujo de reservas intuitivo que permita a los usuarios seleccionar actividades y horarios con facilidad.',
+      'Asegurar el manejo eficiente de datos de usuarios y reservas.',
+    ],
+    solutions: [
+      'Implementación de MongoDB y Mongoose para una gestión óptima de los datos.',
+      'Utilización de PrimeVue para mejorar la interfaz con componentes ricos e interactivos.',
+    ],
+    results: [
+      'Flujo de reservas optimizado para garantizar una experiencia intuitiva y eficiente.',
+      'Sistema seguro y preparado para ser escalado en entornos reales.',
+    ],
+  },
+  techmix: {
+    title: 'TechMix Projects 💻',
+    description: `Un conjunto de proyectos prácticos diseñados para aprender y dominar Vue.js, desde conceptos básicos hasta técnicas avanzadas.`,
+    summary:
+      'Proyectos educativos que combinan diseño modular y enfoque progresivo para el aprendizaje de herramientas modernas.',
+    features: [
+      'Ejercicios técnicos y pruebas para desarrollar lógica de programación.',
+      'Uso de herramientas modernas como Vite, Tailwind CSS y ESLint.',
+      'Proyectos orientados a optimizar el rendimiento y la modularidad del código.',
+    ],
+    technologies: {
+      frontend: ['Vue.js', 'Tailwind CSS', 'Vite', 'ESLint', 'Prettier'],
+      backend: ['Planeado para futuras integraciones.'],
+    },
+    liveLink: 'https://techmixhub.netlify.app/',
+    githubLink: 'https://github.com/YubalHormiga/TechMix',
+    image: techMixImage,
+    challenges: [
+      'Diseñar proyectos educativos que combinen teoría y práctica en un flujo lógico.',
+      'Optimizar la estructura del código para escalar y reutilizar componentes.',
+    ],
+    solutions: [
+      'Uso de Tailwind CSS para acelerar el diseño y lograr estilos consistentes.',
+      'Integración de ESLint y Prettier para mantener un código limpio y estándar.',
+    ],
+    results: [
+      'Colección de proyectos educativos preparados para guiar a otros desarrolladores en su aprendizaje de Vue.js.',
+      'Estructura modular y organizada que facilita la comprensión y el uso del código.',
+    ],
+  },
+}
+
+
+
+--- File: data\projectListData.js ---
+
+export const projectListData = [
+  {
+    name: 'canineconnect',
+    title: 'CanineConnect',
+    description:
+      'Plataforma web que conecta a amantes de los perros con refugios para facilitar adopciones y reportar mascotas perdidas.',
+  },
+  {
+    name: 'watersportworld',
+    title: 'WaterSportWorld',
+    description: 'Proyecto Full Stack para la gestión de reservas de actividades acuáticas.',
+  },
+  {
+    name: 'techmix',
+    title: 'TechMix',
+    description:
+      'Ecosistema de proyectos y ejercicios diseñados para aprender y dominar Vue.js, desde componentes básicos hasta gestión avanzada de estados y estructuras complejas.',
+  },
+]
+
+
+
+--- File: main.js ---
+
+import './assets/main.css'
+
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router'
+
+const app = createApp(App)
+
+app.use(router)
+
+app.mount('#app')
+
+
+
+--- File: router\index.js ---
+
+import { createRouter, createWebHistory } from 'vue-router'
+import HeroSection from '../components/HeroSection.vue'
+
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: HeroSection,
+    },
+    {
+      path: '/about',
+      name: 'about',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/AboutView.vue'),
+    },
+    {
+      path: '/project/:projectName', // Cambié la ruta para hacerla dinámica
+      name: 'project-detail',
+      component: () => import('../components/ProjectDetail.vue'),
+      props: true, // Permite pasar los parámetros de la ruta como props al componente
+    },
+  ],
+})
+
+export default router
+
+
+
+--- File: todo_el_contenido.txt ---
+(Skipped (non-matching extension))
+
+
+--- File: views\AboutView.vue ---
+
+<script setup>
+import { profileData } from '@/data/profileData.js'
+import profilePhoto from '@/assets/images/mi-foto.png'
+</script>
+
+<template>
+  <div class="about-container">
+    <div class="profile-photo-container">
+      <div class="profile-photo">
+        <img :src="profilePhoto" alt="Foto de Yubal Hormiga" />
+      </div>
+      <div class="about-me">
+        <h3>Sobre <span>mí</span></h3>
+      </div>
+    </div>
+    <div class="bio">
+      <p v-for="(paragraph, index) in profileData.bio" :key="index">{{ paragraph }}</p>
+    </div>
+    <div class="additional-info">
+      <div class="education">
+        <h4>Educación</h4>
+        <p v-for="(item, index) in profileData.education" :key="index">{{ item }}</p>
+      </div>
+      <div class="tech-stack">
+        <h4>Stack Tecnológico</h4>
+        <ul>
+          <li v-for="(tech, index) in profileData.techStack" :key="index">{{ tech }}</li>
+        </ul>
+      </div>
+      <div class="skills">
+        <h4>Habilidades</h4>
+        <ul>
+          <li v-for="(skill, index) in profileData.skills" :key="index">{{ skill }}</li>
+        </ul>
+      </div>
+      <div class="languages">
+        <h4>Idiomas</h4>
+        <p>Español: {{ profileData.languages.spanish }}</p>
+        <a
+          href="https://drive.google.com/file/d/1qiKdtHr5qrSFSrJiJ_SJYkDqmETvJryU/view"
+          target="_blank"
+        >
+          Inglés: {{ profileData.languages.english }}
+        </a>
+      </div>
+      <div class="work-experience">
+        <h4>Experiencia laboral</h4>
+        <div v-for="(job, index) in profileData.workExperience" :key="index" class="job">
+          <h5>{{ job.title }}</h5>
+          <p>({{ job.period }})</p>
+          <p v-for="(responsibility, i) in job.responsibilities" :key="i">{{ responsibility }}</p>
+        </div>
+      </div>
+      <div class="download-cv">
+        <a href="/YubalCV.pdf" download>Descargar CV en PDF</a>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.about-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  color: var(--text-color);
+}
+
+.profile-photo-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.profile-photo {
+  display: flex;
+  justify-content: center;
+}
+
+.about-me {
+  display: flex;
+  text-transform: uppercase;
+}
+
+.about-me h3,
+.about-me span {
+  display: block;
+  font-size: 8rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.education,
+.tech-stack,
+.skills,
+.languages,
+.work-experience {
+  margin-bottom: 3rem;
+}
+
+.education p,
+.languages p,
+.job p {
+  margin-bottom: 0;
+}
+
+.languages p,
+.languages a {
+  color: var(--li-color);
+}
+
+.work-experience h5 {
+  font-size: 1.6rem;
+}
+.work-experience p {
+  color: var(--li-color);
+}
+
+p {
+  margin-bottom: 3rem;
+}
+
+h4 {
+  margin-bottom: 1rem;
+  color: var(--heading);
+}
+
+h5 {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--subheading);
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.additional-info {
+  margin-top: 2rem;
+}
+
+.job {
+  margin-bottom: 2rem;
+}
+
+.download-cv {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+[data-theme='dark'] a:hover {
+  color: var(--highlight-dark);
+}
+
+[data-theme='light'] a:hover {
+  color: var(--highlight-light);
+}
+
+@media (min-width: 768px) {
+  .profile-photo-container {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+</style>
+
+
+
+--- File: views\FooterView.vue ---
+
+<script setup>
+import { computed } from 'vue'
+const currentYear = computed(() => new Date().getFullYear())
+</script>
+
+<template>
+  <div class="footer-container">
+    <div class="footer-wrapper">
+      <div class="about-section">
+        <RouterLink to="/about" class="link">About</RouterLink>
+        <a
+          href="https://www.linkedin.com/in/yubal-hormiga/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link"
+        >
+          LinkedIn
+        </a>
+        <a
+          href="https://github.com/YubalHormiga"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link"
+        >
+          GitHub
+        </a>
+      </div>
+    </div>
+    <div class="footer-credit">
+      <h3>Yubal Hormiga {{ currentYear }}</h3>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.footer-container {
+  width: 95%;
+  margin: 0 auto;
+  max-width: var(--max-width);
+  display: flex;
+  flex-direction: column;
+  font-size: 2.4rem;
+  margin-top: 3rem;
+  background-color: var(--background);
+  color: var(--text-color);
+  padding: 2rem;
+  border-top: 2px solid var(--primary);
+}
+
+.about-section {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.footer-credit h3 {
+  display: flex;
+  font-size: 2.4rem;
+  justify-content: center;
+  color: var(--primary);
+}
+
+.footer-credit h3::before {
+  content: '©';
+  font-size: 3rem;
+  margin-right: 0.5rem;
+  color: var(--primary);
+}
+
+@media (min-width: 768px) {
+  .footer-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .about-section {
+    align-items: center;
+  }
+}
+</style>
+
+
+
+--- File: views\MainView.vue ---
+
+<script setup>
+import ProjectOverviewSection from '@/components/ProjectOverviewSection.vue'
+</script>
+
+<template>
+  <ProjectOverviewSection />
+</template>
+

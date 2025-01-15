@@ -1,5 +1,3 @@
-<script setup></script>
-
 <template>
   <div class="hero-section">
     <h1 class="hero-title">
@@ -42,7 +40,7 @@
   animation-delay: 0.2s;
 }
 .hero-title-name span {
-  color: var(--text-color);
+  color: var(--button-dark);
 }
 
 .hero-title-role {

@@ -1,88 +1,65 @@
 :root {
-    --background-primary-dark: #16161a;
-    --text-primary-dark: #fffffe;
-    --paragraph-dark: #94a1b2;
-    --button-dark: #7f5af0;
-    --button-text-dark: #fffffe;
-    --button-hover-dark: #5f4b9a;
-    --primary-dark: #fffffe;
-    --highlight-dark: #ff0055;
-    --secondary-dark: #72757e;
-    --tertiary-dark: #2cb67d;
-    --heading-dark: #e53170;
+    /* Colores tema oscuro */
+    --background-dark: #121212;
+    --text-dark: #e0e0e0;
+    --paragraph-dark: #8b8b8b;
+    --button-dark: #6c4cec;
+    --button-hover-dark: #815fef;
+    --primary-dark: #ffffff;
+    --highlight-dark: #a586f4;
+    --secondary-dark: #717171;
+    --tertiary-dark: #5f5b66;
+    --heading-dark: #ffffff;
 
-    --background-primary-light: #f0f4f8;
-    --text-primary-light: #2e3440;
-    --paragraph-light: #4c566a;
-    --button-light: #5e81ac;
-    --button-text-light: #ffffff;
-    --button-hover-light: #3b4c63;
-    --primary-light: #8fbcbb;
-    --highlight-light: #88c0d0;
-    --secondary-light: #d8dee9;
-    --tertiary-light: #e5e9f0;
-    --heading-light: #335c8d;
+    /* Colores tema claro */
+    --background-light: #ffffff;
+    --text-light: #2e3440;
+    --paragraph-light: #717171;
+    --button-light: #6c4cec;
+    --button-hover-light: #9473f2;
+    --primary-light: #6c4cec;
+    --highlight-light: #9473f2;
+    --secondary-light: #9c9595;
+    --tertiary-light: #5f5b66;
+    --heading-light: #535d72;
 
-    --link-color-dark: #fffffe;
-    --link-hover-color-dark: #ff0055;
-    --link-color-light: #5e81ac;
-    --link-hover-color-light: #3b4c63;
-    --copied-message-color-dark: #2cb67d;
-    --copied-message-color-light: #a3be8c;
-    --h2-color-dark: #e53170;
-    --h2-color-light: #2e3440;
-    --h3-color-dark: #7f5af0;
-    --h3-color-light: #5e81ac;
-
-    --li-color-dark: #c0c0c0;
-    --li-hover-color-dark: #ff0055;
-    --li-color-light: #3b4c63;
-    --li-hover-color-light: #ff88c0;
+    /* Colores comunes */
+    --copied-message-color: #b599f7;
+    --link-color: #6c4cec;
+    --link-hover-color: #815fef;
+    --h3-color: #9473f2;
 }
 
 [data-theme="dark"] {
-    --background: var(--background-primary-dark);
-    --text-color: var(--text-primary-dark);
+    --background: var(--background-dark);
+    --text-color: var(--text-dark);
     --paragraph-color: var(--paragraph-dark);
     --button-color: var(--button-dark);
-    --button-text-color: var(--button-text-dark);
     --button-hover-color: var(--button-hover-dark);
-    --anchor: var(--link-color-dark);
-    --anchor-hover: var(--link-hover-color-dark);
     --title-color: var(--primary-dark);
     --title-hover-color: var(--highlight-dark);
     --secondary: var(--secondary-dark);
     --tertiary: var(--tertiary-dark);
     --heading: var(--heading-dark);
-    --copied-message-color: var(--copied-message-color-dark);
-    --h2-color: var(--h2-color-dark);
-    --h3-color: var(--h3-color-dark);
-
-    --li-color: var(--li-color-dark);
-    --li-hover-color: var(--li-hover-color-dark);
+    --h2-color: var(--heading-dark);
+    --li-color: var(--secondary-dark);
+    --li-hover-color: var(--highlight-dark);
 }
 
 [data-theme="light"] {
-    --background: var(--background-primary-light);
-    --text-color: var(--text-primary-light);
+    --background: var(--background-light);
+    --text-color: var(--text-light);
     --paragraph-color: var(--paragraph-light);
     --button-color: var(--button-light);
-    --button-text-color: var(--button-text-light);
     --button-hover-color: var(--button-hover-light);
-    --anchor: var(--link-color-light);
-    --anchor-hover: var(--link-hover-color-light);
     --title-color: var(--primary-light);
     --title-hover-color: var(--highlight-light);
     --secondary: var(--secondary-light);
     --tertiary: var(--tertiary-light);
     --heading: var(--heading-light);
-    --copied-message-color: var(--copied-message-color-light);
-    --h2-color: var(--h2-color-light);
-    --h3-color: var(--h3-color-light);
-
-    /* Aplicado a li en light */
-    --li-color: var(--li-color-light);
-    --li-hover-color: var(--li-hover-color-light);
+    --h2-color: var(--heading-light);
+    --li-color: var(--secondary-light);
+    --li-hover-color: var(--highlight-light);
 }
 
 /* Globales */
@@ -121,13 +98,14 @@ textarea,
 select {
     font: inherit;
     background: var(--button-color);
-    color: var(--button-text-color);
+    color: var(--text-color);
 }
 
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5 {
     font-weight: 700;
     color: var(--heading);
 }
@@ -140,16 +118,27 @@ p {
 
 a {
     text-decoration: none;
-    color: var(--anchor);
+    color: var(--link-color);
 }
 
 a:hover {
-    color: var(--anchor-hover);
+    color: var(--link-hover-color);
 }
 
 ul,
-ol {
+ol,
+li {
     list-style: none;
+}
+
+li {
+    color: var(--li-color);
+    font-size: 1.6rem;
+    line-height: 1.6;
+}
+
+li:hover {
+    color: var(--li-hover-color);
 }
 
 button {
@@ -169,15 +158,4 @@ svg {
     width: 95%;
     margin: 0 auto;
     max-width: var(--max-width);
-}
-
-/* Estilo para li */
-li {
-    color: var(--li-color);
-    font-size: 1.6rem;
-    line-height: 1.6;
-}
-
-li:hover {
-    color: var(--li-hover-color);
 }

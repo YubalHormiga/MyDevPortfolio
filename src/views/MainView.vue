@@ -5,4 +5,3 @@ import ProjectOverviewSection from '@/components/ProjectOverviewSection.vue'
 <template>
   <ProjectOverviewSection />
 </template>
-<style scoped></style>

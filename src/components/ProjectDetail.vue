@@ -143,13 +143,13 @@ watch(
   background-color: var(--button-color);
   color: var(--button-text-color);
   padding: 0.5rem 1rem;
-  text-decoration: none;
   border-radius: 3px;
+  cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .link-button:hover {
-  background-color: var(--tertiary);
+  background-color: var(--button-hover-color);
   color: var(--text-secondary);
 }
 
@@ -192,6 +192,7 @@ ul {
 li {
   margin-bottom: 0.5rem;
   text-align: center;
+  color: var(--li-color);
 }
 
 @media (min-width: 768px) {

@@ -19,7 +19,7 @@ import profilePhoto from '@/assets/images/mi-foto.png'
     <div class="additional-info">
       <div class="education">
         <h4>Educación</h4>
-        <p v-for="(item, index) in profileData.education" :key="index">{{ item }}</p>
+        <li v-for="(item, index) in profileData.education" :key="index">{{ item }}</li>
       </div>
       <div class="tech-stack">
         <h4>Stack Tecnológico</h4>
@@ -35,20 +35,25 @@ import profilePhoto from '@/assets/images/mi-foto.png'
       </div>
       <div class="languages">
         <h4>Idiomas</h4>
-        <p>Español: {{ profileData.languages.spanish }}</p>
-        <a
-          href="https://drive.google.com/file/d/1qiKdtHr5qrSFSrJiJ_SJYkDqmETvJryU/view"
-          target="_blank"
-        >
-          Inglés: {{ profileData.languages.english }}
-        </a>
+        <ul>
+          <li>Español: {{ profileData.languages.spanish }}</li>
+          <li>
+            <a
+              href="https://drive.google.com/file/d/1qiKdtHr5qrSFSrJiJ_SJYkDqmETvJryU/view"
+              target="_blank"
+            >
+              Inglés: {{ profileData.languages.english }}
+            </a>
+          </li>
+        </ul>
       </div>
+
       <div class="work-experience">
         <h4>Experiencia laboral</h4>
         <div v-for="(job, index) in profileData.workExperience" :key="index" class="job">
           <h5>{{ job.title }}</h5>
           <p>({{ job.period }})</p>
-          <p v-for="(responsibility, i) in job.responsibilities" :key="i">{{ responsibility }}</p>
+          <li v-for="(responsibility, i) in job.responsibilities" :key="i">{{ responsibility }}</li>
         </div>
       </div>
       <div class="download-cv">
@@ -59,6 +64,33 @@ import profilePhoto from '@/assets/images/mi-foto.png'
 </template>
 
 <style scoped>
+p {
+  margin-bottom: 3rem;
+}
+
+h4 {
+  margin-bottom: 1rem;
+  color: var(--heading);
+}
+
+h5 {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--subheading);
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+a:hover {
+  color: var(--li-hover-color);
+}
+
 .about-container {
   display: flex;
   flex-direction: column;
@@ -104,36 +136,12 @@ import profilePhoto from '@/assets/images/mi-foto.png'
   margin-bottom: 0;
 }
 
-.languages p,
-.languages a {
-  color: var(--li-color);
-}
-
 .work-experience h5 {
   font-size: 1.6rem;
+  color: var(--tertiary);
 }
 .work-experience p {
-  color: var(--li-color);
-}
-
-p {
-  margin-bottom: 3rem;
-}
-
-h4 {
-  margin-bottom: 1rem;
-  color: var(--heading);
-}
-
-h5 {
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-  color: var(--subheading);
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
+  color: var(--tertiary);
 }
 
 .additional-info {
@@ -147,19 +155,6 @@ ul {
 .download-cv {
   text-align: center;
   margin-top: 3rem;
-}
-
-a {
-  color: var(--primary);
-  text-decoration: underline;
-}
-
-[data-theme='dark'] a:hover {
-  color: var(--highlight-dark);
-}
-
-[data-theme='light'] a:hover {
-  color: var(--highlight-light);
 }
 
 @media (min-width: 768px) {
