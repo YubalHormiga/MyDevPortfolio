@@ -18,7 +18,9 @@ watch(isDarkMode, (newValue) => {
 })
 
 onMounted(() => {
-  document.documentElement.setAttribute('data-theme', isDarkMode.value ? 'dark' : 'light')
+  const initialTheme = isDarkMode.value ? 'dark' : 'light'
+  document.documentElement.setAttribute('data-theme', initialTheme)
+  localStorage.setItem('theme', initialTheme)
 })
 </script>
 
