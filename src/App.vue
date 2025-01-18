@@ -26,7 +26,7 @@ onMounted(() => {
   <header class="header">
     <NavigationBar />
   </header>
-  <div class="main-container container">
+  <div class="container main-container">
     <Transition name="slide-left">
       <RouterView />
     </Transition>
