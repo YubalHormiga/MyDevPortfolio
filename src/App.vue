@@ -26,7 +26,7 @@ onMounted(() => {
   <header class="header">
     <NavigationBar />
   </header>
-  <div class="container">
+  <div class="main-container container">
     <Transition name="slide-left">
       <RouterView />
     </Transition>
@@ -51,7 +51,7 @@ onMounted(() => {
   max-width: var(--max-width);
 }
 
-.container {
+.main-container {
   display: grid;
   min-height: 100dvh;
   grid-template-rows: auto 1fr auto;
