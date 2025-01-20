@@ -77,5 +77,9 @@ const currentYear = computed(() => new Date().getFullYear())
   .about-section {
     align-items: center;
   }
+  .footer-credit h3,
+  .footer-credit h3::before {
+    font-size: 2.4rem;
+  }
 }
 </style>
