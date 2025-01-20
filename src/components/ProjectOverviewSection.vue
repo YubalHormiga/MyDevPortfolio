@@ -78,4 +78,9 @@ const projects = ref(projectListData)
     font-size: 4rem;
   }
 }
+@media (max-width: 360px) {
+  .project-title {
+    font-size: 3rem;
+  }
+}
 </style>

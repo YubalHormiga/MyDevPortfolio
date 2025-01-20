@@ -77,4 +77,9 @@ const currentYear = computed(() => new Date().getFullYear())
     align-items: center;
   }
 }
+@media (max-width: 360px) {
+  .about-section {
+    font-size: large;
+  }
+}
 </style>
