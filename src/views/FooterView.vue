@@ -56,14 +56,14 @@ const currentYear = computed(() => new Date().getFullYear())
 
 .footer-credit h3 {
   display: flex;
-  font-size: 2.4rem;
+  font-size: medium;
   justify-content: center;
   color: var(--primary);
 }
 
 .footer-credit h3::before {
   content: '©';
-  font-size: 3rem;
+  font-size: medium;
   margin-right: 0.5rem;
   color: var(--primary);
 }
@@ -79,7 +79,7 @@ const currentYear = computed(() => new Date().getFullYear())
 }
 @media (max-width: 360px) {
   .about-section {
-    font-size: large;
+    font-size: medium;
   }
 }
 </style>
