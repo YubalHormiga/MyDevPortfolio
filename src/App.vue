@@ -14,10 +14,26 @@ const handleScroll = () => {
     hasScrolled.value = true
   }
 }
+
 watch(route, () => {
   window.scrollTo(0, 0)
 })
+
 onMounted(() => {
+  // Detectar navegadores internos de redes sociales (LinkedIn, Facebook, etc.)
+  const userAgent = navigator.userAgent || navigator.vendor || window.opera
+  const isSocialMediaInAppBrowser = /LinkedIn|FBAN|FBAV|Instagram/.test(userAgent)
+
+  if (isSocialMediaInAppBrowser) {
+    // Redirigir al usuario hacia un navegador externo
+    const redirectUrl = window.location.href
+    alert(
+      'Para la mejor experiencia, abre este enlace en un navegador externo como Chrome o Safari.',
+    )
+    window.location.href = `intent://${redirectUrl.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;end;`
+  }
+
+  // Escuchar el evento de desplazamiento
   window.addEventListener('scroll', handleScroll)
 })
 </script>
