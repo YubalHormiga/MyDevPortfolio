@@ -1,4 +1,6 @@
 :root {
+    --max-width: 120rem;
+
     /* Colores tema oscuro */
     --background-dark: #121212;
     --text-dark: #e0e0e0;
@@ -75,12 +77,11 @@ body {
 *:before,
 *:after {
     box-sizing: inherit;
-}
-
-* {
     margin: 0;
     padding: 0;
 }
+
+
 
 body {
     min-height: 100vh;
