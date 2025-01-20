@@ -42,7 +42,7 @@ const goToNextProject = () => {
 
 <style scoped>
 .project-navigation {
-  display: inline-flex;
+  display: flex;
   justify-content: space-around;
   gap: 2rem;
   margin-top: 2rem;

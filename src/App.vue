@@ -10,7 +10,7 @@ const route = useRoute()
 const hasScrolled = ref(false)
 
 const handleScroll = () => {
-  if (window.scrollY > 100) {
+  if (window.scrollY > 50) {
     hasScrolled.value = true
   }
 }
@@ -26,7 +26,7 @@ onMounted(() => {
   <header class="header">
     <NavigationBar />
   </header>
-  <div class="container main-container">
+  <div class="main-container container">
     <Transition name="slide-left">
       <RouterView />
     </Transition>
