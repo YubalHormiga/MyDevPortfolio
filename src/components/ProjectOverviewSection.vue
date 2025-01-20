@@ -80,7 +80,7 @@ const projects = ref(projectListData)
 }
 @media (max-width: 360px) {
   .project-title {
-    font-size: 3rem;
+    font-size: 2.8rem;
   }
 }
 </style>

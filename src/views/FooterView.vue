@@ -39,7 +39,7 @@ const currentYear = computed(() => new Date().getFullYear())
   max-width: var(--max-width);
   display: flex;
   flex-direction: column;
-  font-size: 2.4rem;
+  font-size: medium;
   margin-top: 3rem;
   background-color: var(--background);
   color: var(--text-color);
@@ -72,14 +72,10 @@ const currentYear = computed(() => new Date().getFullYear())
   .footer-container {
     flex-direction: row;
     justify-content: space-between;
+    font-size: 2.4rem;
   }
   .about-section {
     align-items: center;
-  }
-}
-@media (max-width: 360px) {
-  .about-section {
-    font-size: medium;
   }
 }
 </style>
