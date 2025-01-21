@@ -1,10 +1,33 @@
 <script setup>
+import { ref } from 'vue'
 import { profileData } from '@/data/profileData.js'
 import profilePhoto from '@/assets/images/mi-foto.png'
+
+const certificationsPerPage = 3
+const currentPage = ref(0)
+
+const nextPage = () => {
+  if ((currentPage.value + 1) * certificationsPerPage < profileData.certifications.length) {
+    currentPage.value++
+  }
+}
+
+const prevPage = () => {
+  if (currentPage.value > 0) {
+    currentPage.value--
+  }
+}
+
+const paginatedCertifications = () => {
+  const start = currentPage.value * certificationsPerPage
+  const end = start + certificationsPerPage
+  return profileData.certifications.slice(start, end)
+}
 </script>
 
 <template>
   <div class="about-container">
+    <!-- Foto de perfil y presentación -->
     <div class="profile-photo-container">
       <div class="profile-photo">
         <img :src="profilePhoto" alt="Foto de Yubal Hormiga" />
@@ -13,26 +36,71 @@ import profilePhoto from '@/assets/images/mi-foto.png'
         <h3>Sobre <span>mí</span></h3>
       </div>
     </div>
+
     <div class="bio">
       <p v-for="(paragraph, index) in profileData.bio" :key="index">{{ paragraph }}</p>
     </div>
+
     <div class="additional-info">
       <div class="education">
         <h4>Educación</h4>
-        <li v-for="(item, index) in profileData.education" :key="index">{{ item }}</li>
+        <p v-for="(item, index) in profileData.education" :key="index">{{ item }}</p>
       </div>
+
+      <div class="certifications">
+        <h4>Certificaciones</h4>
+        <ul>
+          <li v-for="(certification, index) in paginatedCertifications()" :key="index">
+            <a :href="certification.link" target="_blank" class="certification-title">
+              {{ certification.title }}
+            </a>
+            <p>Institución: {{ certification.institution }}</p>
+            <p>Fecha: {{ certification.date }}</p>
+            <p class="certification-description">{{ certification.description }}</p>
+            <p>Habilidades: {{ certification.skills.join(', ') }}</p>
+          </li>
+        </ul>
+        <div class="navigation">
+          <button
+            @click="prevPage"
+            :disabled="currentPage === 0"
+            :class="{ disabled: currentPage === 0 }"
+          >
+            Anterior
+          </button>
+          <span
+            >{{ currentPage + 1 }} /
+            {{ Math.ceil(profileData.certifications.length / certificationsPerPage) }}</span
+          >
+          <button
+            @click="nextPage"
+            :disabled="
+              (currentPage + 1) * certificationsPerPage >= profileData.certifications.length
+            "
+            :class="{
+              disabled:
+                (currentPage + 1) * certificationsPerPage >= profileData.certifications.length,
+            }"
+          >
+            Siguiente
+          </button>
+        </div>
+      </div>
+
       <div class="tech-stack">
         <h4>Stack Tecnológico</h4>
         <ul>
           <li v-for="(tech, index) in profileData.techStack" :key="index">{{ tech }}</li>
         </ul>
       </div>
+
       <div class="skills">
         <h4>Habilidades</h4>
         <ul>
           <li v-for="(skill, index) in profileData.skills" :key="index">{{ skill }}</li>
         </ul>
       </div>
+
       <div class="languages">
         <h4>Idiomas</h4>
         <ul>
@@ -56,6 +124,7 @@ import profilePhoto from '@/assets/images/mi-foto.png'
           <li v-for="(responsibility, i) in job.responsibilities" :key="i">{{ responsibility }}</li>
         </div>
       </div>
+
       <div class="download-cv">
         <a href="/YubalCV.pdf" download>Descargar CV en PDF</a>
       </div>
@@ -69,8 +138,9 @@ p {
 }
 
 h4 {
+  font-weight: 500;
   margin-bottom: 1rem;
-  color: var(--heading);
+  font-size: 2rem;
 }
 
 h5 {
@@ -90,12 +160,26 @@ a {
 a:hover {
   color: var(--li-hover-color);
 }
+a.see-more {
+  color: var(--primary-light);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a.see-less {
+  color: var(--primary-light);
+  text-decoration: none;
+}
+
+a.see-more:hover,
+a.see-less:hover {
+  color: var(--highlight-light);
+}
 
 .about-container {
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  color: var(--text-color);
 }
 
 .profile-photo-container {
@@ -123,6 +207,7 @@ a:hover {
 }
 
 .education,
+.certifications,
 .tech-stack,
 .skills,
 .languages,
@@ -131,11 +216,14 @@ a:hover {
 }
 
 .education p,
+.certifications p,
 .languages p,
 .job p {
   margin-bottom: 0;
 }
-
+.certification-title {
+  color: var(--tertiary);
+}
 .work-experience h5 {
   font-size: 1.6rem;
   color: var(--tertiary);
@@ -155,6 +243,31 @@ a:hover {
 .download-cv {
   text-align: center;
   margin-top: 3rem;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 2rem;
+}
+
+button {
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+button.disabled {
+  background-color: var(--disabled);
+  cursor: not-allowed;
 }
 
 @media (min-width: 768px) {

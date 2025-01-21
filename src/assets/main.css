@@ -4,7 +4,7 @@
     /* Colores tema oscuro */
     --background-dark: #121212;
     --text-dark: #e0e0e0;
-    --paragraph-dark: #8b8b8b;
+    --paragraph-dark: #a19e9e;
     --button-dark: #6c4cec;
     --button-hover-dark: #815fef;
     --primary-dark: #ffffff;
@@ -21,9 +21,9 @@
     --button-hover-light: #9473f2;
     --primary-light: #6c4cec;
     --highlight-light: #9473f2;
-    --secondary-light: #9c9595;
-    --tertiary-light: #5f5b66;
-    --heading-light: #535d72;
+    --secondary-light: #717171;
+    --tertiary-light: #524766;
+    --heading-light: #423e47;
 
     /* Colores comunes */
     --copied-message-color: #b599f7;
@@ -107,7 +107,6 @@ h2,
 h3,
 h4,
 h5 {
-    font-weight: 700;
     color: var(--heading);
 }
 

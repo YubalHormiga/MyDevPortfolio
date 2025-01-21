@@ -34,17 +34,10 @@ const currentYear = computed(() => new Date().getFullYear())
 
 <style scoped>
 .footer-container {
-  width: 95%;
-  margin: 0 auto;
-  max-width: var(--max-width);
   display: flex;
   flex-direction: column;
-  font-size: medium;
-  margin-top: 3rem;
-  background-color: var(--background);
-  color: var(--text-color);
-  padding: 2rem;
-  border-top: 2px solid var(--primary);
+  font-size: large;
+  margin: 2rem 0;
 }
 
 .about-section {
@@ -56,14 +49,14 @@ const currentYear = computed(() => new Date().getFullYear())
 
 .footer-credit h3 {
   display: flex;
-  font-size: medium;
+  font-size: large;
   justify-content: center;
   color: var(--primary);
 }
 
 .footer-credit h3::before {
   content: '©';
-  font-size: medium;
+  font-size: large;
   margin-right: 0.5rem;
   color: var(--primary);
 }
