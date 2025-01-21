@@ -5,9 +5,9 @@ export const profileData = {
     `Estoy buscando un puesto como desarrollador web junior donde pueda aplicar mis conocimientos técnicos y mi experiencia en gestión para impulsar proyectos innovadores. Mi objetivo es contribuir con mis habilidades y seguir creciendo en el fascinante mundo de la programación.`,
   ],
   education: [
-    `Full Stack Web Developer, Neoland - Developer Bootcamp (Septiembre 2022 – Diciembre 2022)`,
-    `Grado Medio en Sistemas Microinformáticos y Redes, FP Ilerna Online (2020 – 2022)`,
-    `Diplomado en Dirección y Administración de Empresas, Escuela de Negocios M.B.A (1998 – 2002)`,
+    `📚 Full Stack Web Developer, Neoland Bootcamp (Septiembre 2022 – Diciembre 2022)`,
+    `💻 Grado Medio en Sistemas Microinformáticos y Redes, FP Ilerna Online (2020 – 2022)`,
+    `🎓 Diplomado en Dirección y Administración de Empresas, Escuela de Negocios M.B.A (1998 – 2002)`,
   ],
   certifications: [
     {
