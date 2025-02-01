@@ -18,9 +18,11 @@ const handleScroll = () => {
     hasScrolled.value = true
   }
 }
+
 watch(route, () => {
   window.scrollTo(0, 0)
 })
+
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
 })
@@ -806,6 +808,11 @@ const projects = ref(projectListData)
     font-size: 4rem;
   }
 }
+@media (max-width: 360px) {
+  .project-title {
+    font-size: 2.8rem;
+  }
+}
 </style>
 
 
@@ -868,9 +875,107 @@ export const profileData = {
     `Estoy buscando un puesto como desarrollador web junior donde pueda aplicar mis conocimientos técnicos y mi experiencia en gestión para impulsar proyectos innovadores. Mi objetivo es contribuir con mis habilidades y seguir creciendo en el fascinante mundo de la programación.`,
   ],
   education: [
-    `Full Stack Web Developer, Neoland - Developer Bootcamp (Septiembre 2022 – Diciembre 2022)`,
-    `Grado Medio en Sistemas Microinformáticos y Redes, FP Ilerna Online (2020 – 2022)`,
-    `Diplomado en Dirección y Administración de Empresas, Escuela de Negocios M.B.A (1998 – 2002)`,
+    `📚 Full Stack Web Developer, Neoland Bootcamp (Septiembre 2022 – Diciembre 2022)`,
+    `💻 Grado Medio en Sistemas Microinformáticos y Redes, FP Ilerna Online (2020 – 2022)`,
+    `🎓 Diplomado en Dirección y Administración de Empresas, Escuela de Negocios M.B.A (1998 – 2002)`,
+  ],
+  certifications: [
+    {
+      title: 'TypeScript',
+      link: 'https://udemy-certificate.s3.amazonaws.com/image/UC-e2215839-d6d7-44f8-b82a-19ba03fb6732.jpg',
+      institution: 'Udemy',
+      date: '12-01-2024',
+      description:
+        'Curso avanzado de TypeScript donde se desarrolla una base sólida en el uso del lenguaje para proyectos web, el uso de importadores de módulos y la prevención de errores en jQuery',
+      skills: ['TypeScript'],
+    },
+    {
+      title: 'Aprende Vue.js creando Proyectos Reales',
+      link: 'https://udemy-certificate.s3.amazonaws.com/image/UC-e4c5599b-0bda-477f-b3d5-390159966e16.jpg',
+      institution: 'Udemy',
+      date: '07-11-2023',
+      description:
+        'Curso avanzado de Vue.js donde se desarrollan proyectos con tecnologías como MEVN, Pinia, Composition API, Vuetify y Firebase.',
+      skills: [
+        'Vue.js',
+        'MEVN',
+        'Pinia',
+        'Composition API',
+        'Vue Router',
+        'Vuetify',
+        'Firebase',
+        'APIs',
+        'Composables',
+      ],
+    },
+    {
+      title: 'JavaScript Moderno',
+      link: 'https://udemy-certificate.s3.amazonaws.com/image/UC-ac90734e-4aa8-4acc-9305-98b70a6e47fb.jpg',
+      institution: 'Udemy',
+      date: '04-05-2023',
+      description: 'Guía para dominar el lenguaje',
+      skills: ['JavaScript', 'DOM Manipulation', 'ES6'],
+    },
+    {
+      title: 'Desarrollo Web Full Stack, Neoland',
+      link: 'https://www.credential.net/5879ff0d-5964-44da-becf-f1d85291ee70#gs.mramya',
+      institution: 'Neoland',
+      date: '01-12-2023',
+      description:
+        'Curso intensivo de desarrollo web Full Stack, que cubre front-end, back-end y bases de datos.',
+      skills: ['JavaScript', 'Node.js', 'React', 'Express', 'MongoDB'],
+    },
+    {
+      title: 'Super Pack, HTML, CSS Y JAVASCRIPT',
+      link: 'https://udemy-certificate.s3.amazonaws.com/image/UC-e7e56912-6c2c-4eae-baa2-4b939d24e65c.jpg',
+      institution: 'Udemy',
+      date: '15-09-2022',
+      description:
+        'Aprendizaje de los conceptos esenciales de HTML5 para crear la estructura de páginas web. Estudio de CSS3 para la estilización y diseño de sitios web utilizando Hojas de Estilo en Cascada (CSS). Dominio de JavaScript para funciones interactivas en frontend y backend, esenciales en el desarrollo web moderno y altamente demandadas en el mercado laboral.',
+      skills: ['HTML', 'CSS', 'JavaScript'],
+    },
+    {
+      title: 'Curso de CSS',
+      link: 'https://udemy-certificate.s3.amazonaws.com/image/UC-e1b2622e-4a5d-4efd-b1e0-32fcdd4dffdd.jpg',
+      institution: 'Udemy',
+      date: '12-07-2022',
+      description: 'Introducción Completa a CSS y CSS3',
+      skills: ['CSS'],
+    },
+    {
+      title: 'Universidad CSS',
+      link: 'https://udemy-certificate.s3.amazonaws.com/image/UC-421b1048-fe66-4ebd-a181-11284a6a31d2.jpg',
+      institution: 'Udemy',
+      date: '02-07-2022',
+      description: 'Aprende CSS desde Cero a Experto',
+      skills: ['CSS'],
+    },
+    {
+      title: 'Universidad HTML',
+      link: 'https://udemy-certificate.s3.amazonaws.com/image/UC-fad78bf7-b494-4c63-92f2-3678fa2dee78.jpg',
+      institution: 'Udemy',
+      date: '27-06-2022',
+      description: 'Aprende HTML desde Cero a Experto',
+      skills: ['HTML'],
+    },
+    {
+      title: 'CSS Fundamentals',
+      link: 'https://www.sololearn.com/certificates/CT-QQPBAXS2',
+      institution: 'SoloLearn',
+      date: '25-05-2021',
+      description:
+        'Aprendizaje de los conceptos esenciales de CSS, incluyendo la estilización y diseño de páginas web utilizando Hojas de Estilo en Cascada (CSS)',
+      skills: ['CSS'],
+    },
+    {
+      title: 'HTML Fundamentals',
+      link: 'https://www.sololearn.com/certificates/CT-CSST8RG8',
+      institution: 'SoloLearn',
+      date: '15-05-2021',
+      description:
+        'Dominio de los fundamentos de HTML, incluyendo la estructuración de contenido web, creación de formularios interactivos y la incorporación de elementos multimedia',
+      skills: ['HTML'],
+    },
   ],
   techStack: [
     'HTML5',
@@ -1113,12 +1218,35 @@ export default router
 --- File: views\AboutView.vue ---
 
 <script setup>
+import { ref } from 'vue'
 import { profileData } from '@/data/profileData.js'
 import profilePhoto from '@/assets/images/mi-foto.png'
+
+const certificationsPerPage = 3
+const currentPage = ref(0)
+
+const nextPage = () => {
+  if ((currentPage.value + 1) * certificationsPerPage < profileData.certifications.length) {
+    currentPage.value++
+  }
+}
+
+const prevPage = () => {
+  if (currentPage.value > 0) {
+    currentPage.value--
+  }
+}
+
+const paginatedCertifications = () => {
+  const start = currentPage.value * certificationsPerPage
+  const end = start + certificationsPerPage
+  return profileData.certifications.slice(start, end)
+}
 </script>
 
 <template>
   <div class="about-container">
+    <!-- Foto de perfil y presentación -->
     <div class="profile-photo-container">
       <div class="profile-photo">
         <img :src="profilePhoto" alt="Foto de Yubal Hormiga" />
@@ -1127,26 +1255,71 @@ import profilePhoto from '@/assets/images/mi-foto.png'
         <h3>Sobre <span>mí</span></h3>
       </div>
     </div>
+
     <div class="bio">
       <p v-for="(paragraph, index) in profileData.bio" :key="index">{{ paragraph }}</p>
     </div>
+
     <div class="additional-info">
       <div class="education">
         <h4>Educación</h4>
-        <li v-for="(item, index) in profileData.education" :key="index">{{ item }}</li>
+        <p v-for="(item, index) in profileData.education" :key="index">{{ item }}</p>
       </div>
+
+      <div class="certifications">
+        <h4>Certificaciones</h4>
+        <ul>
+          <li v-for="(certification, index) in paginatedCertifications()" :key="index">
+            <a :href="certification.link" target="_blank" class="certification-title">
+              {{ certification.title }}
+            </a>
+            <p>Institución: {{ certification.institution }}</p>
+            <p>Fecha: {{ certification.date }}</p>
+            <p class="certification-description">{{ certification.description }}</p>
+            <p>Habilidades: {{ certification.skills.join(', ') }}</p>
+          </li>
+        </ul>
+        <div class="navigation">
+          <button
+            @click="prevPage"
+            :disabled="currentPage === 0"
+            :class="{ disabled: currentPage === 0 }"
+          >
+            Anterior
+          </button>
+          <span
+            >{{ currentPage + 1 }} /
+            {{ Math.ceil(profileData.certifications.length / certificationsPerPage) }}</span
+          >
+          <button
+            @click="nextPage"
+            :disabled="
+              (currentPage + 1) * certificationsPerPage >= profileData.certifications.length
+            "
+            :class="{
+              disabled:
+                (currentPage + 1) * certificationsPerPage >= profileData.certifications.length,
+            }"
+          >
+            Siguiente
+          </button>
+        </div>
+      </div>
+
       <div class="tech-stack">
         <h4>Stack Tecnológico</h4>
         <ul>
           <li v-for="(tech, index) in profileData.techStack" :key="index">{{ tech }}</li>
         </ul>
       </div>
+
       <div class="skills">
         <h4>Habilidades</h4>
         <ul>
           <li v-for="(skill, index) in profileData.skills" :key="index">{{ skill }}</li>
         </ul>
       </div>
+
       <div class="languages">
         <h4>Idiomas</h4>
         <ul>
@@ -1170,6 +1343,7 @@ import profilePhoto from '@/assets/images/mi-foto.png'
           <li v-for="(responsibility, i) in job.responsibilities" :key="i">{{ responsibility }}</li>
         </div>
       </div>
+
       <div class="download-cv">
         <a href="/YubalCV.pdf" download>Descargar CV en PDF</a>
       </div>
@@ -1183,8 +1357,9 @@ p {
 }
 
 h4 {
+  font-weight: 500;
   margin-bottom: 1rem;
-  color: var(--heading);
+  font-size: 2rem;
 }
 
 h5 {
@@ -1204,12 +1379,26 @@ a {
 a:hover {
   color: var(--li-hover-color);
 }
+a.see-more {
+  color: var(--primary-light);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a.see-less {
+  color: var(--primary-light);
+  text-decoration: none;
+}
+
+a.see-more:hover,
+a.see-less:hover {
+  color: var(--highlight-light);
+}
 
 .about-container {
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  color: var(--text-color);
 }
 
 .profile-photo-container {
@@ -1237,6 +1426,7 @@ a:hover {
 }
 
 .education,
+.certifications,
 .tech-stack,
 .skills,
 .languages,
@@ -1245,11 +1435,14 @@ a:hover {
 }
 
 .education p,
+.certifications p,
 .languages p,
 .job p {
   margin-bottom: 0;
 }
-
+.certification-title {
+  color: var(--tertiary);
+}
 .work-experience h5 {
   font-size: 1.6rem;
   color: var(--tertiary);
@@ -1269,6 +1462,31 @@ a:hover {
 .download-cv {
   text-align: center;
   margin-top: 3rem;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 2rem;
+}
+
+button {
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+button.disabled {
+  background-color: var(--disabled);
+  cursor: not-allowed;
 }
 
 @media (min-width: 768px) {
@@ -1319,17 +1537,10 @@ const currentYear = computed(() => new Date().getFullYear())
 
 <style scoped>
 .footer-container {
-  width: 95%;
-  margin: 0 auto;
-  max-width: var(--max-width);
   display: flex;
   flex-direction: column;
-  font-size: 2.4rem;
-  margin-top: 3rem;
-  background-color: var(--background);
-  color: var(--text-color);
-  padding: 2rem;
-  border-top: 2px solid var(--primary);
+  font-size: large;
+  margin: 2rem 0;
 }
 
 .about-section {
@@ -1341,14 +1552,14 @@ const currentYear = computed(() => new Date().getFullYear())
 
 .footer-credit h3 {
   display: flex;
-  font-size: 2.4rem;
+  font-size: large;
   justify-content: center;
   color: var(--primary);
 }
 
 .footer-credit h3::before {
   content: '©';
-  font-size: 3rem;
+  font-size: large;
   margin-right: 0.5rem;
   color: var(--primary);
 }
@@ -1357,9 +1568,14 @@ const currentYear = computed(() => new Date().getFullYear())
   .footer-container {
     flex-direction: row;
     justify-content: space-between;
+    font-size: 2.4rem;
   }
   .about-section {
     align-items: center;
+  }
+  .footer-credit h3,
+  .footer-credit h3::before {
+    font-size: 2.4rem;
   }
 }
 </style>
