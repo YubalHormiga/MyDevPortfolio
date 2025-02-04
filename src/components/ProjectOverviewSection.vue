@@ -5,12 +5,11 @@ import { projectListData } from '../data/projectListData'
 import ContactSection from './ContactSection.vue'
 
 const router = useRouter()
+const projects = ref(projectListData)
 
 const navigateToProject = (projectName) => {
-  router.push({ path: '/project/' + projectName })
+  router.push({ path: `/project/${projectName}` })
 }
-
-const projects = ref(projectListData)
 </script>
 
 <template>
@@ -23,6 +22,7 @@ const projects = ref(projectListData)
     <h2 class="project-title" @click="navigateToProject(project.name)">{{ project.title }}</h2>
     <div class="project-description">
       <p>{{ project.description }}</p>
+      <p><span>Tecnologías usadas:</span> {{ project.technologies.join(', ') }}</p>
     </div>
   </section>
 
@@ -48,6 +48,11 @@ const projects = ref(projectListData)
   font-family: 'Wendy One', serif;
   letter-spacing: 2px;
   color: var(--text-color);
+}
+
+.project-description span {
+  font-weight: bold;
+  color: var(--button-color);
 }
 
 @media (max-width: 1200px) {
@@ -78,6 +83,7 @@ const projects = ref(projectListData)
     font-size: 4rem;
   }
 }
+
 @media (max-width: 360px) {
   .project-title {
     font-size: 2.8rem;
