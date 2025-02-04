@@ -9,20 +9,15 @@ const route = useRoute()
 const projectNames = Object.keys(projectDetails)
 const currentIndex = computed(() => projectNames.indexOf(route.params.projectName))
 
-const goToPreviousProject = () => {
-  const prevIndex = (currentIndex.value - 1 + projectNames.length) % projectNames.length
-  router.push({ name: 'project-detail', params: { projectName: projectNames[prevIndex] } })
-}
-
-const goToNextProject = () => {
-  const nextIndex = (currentIndex.value + 1) % projectNames.length
-  router.push({ name: 'project-detail', params: { projectName: projectNames[nextIndex] } })
+const navigateProject = (offset) => {
+  const newIndex = (currentIndex.value + offset + projectNames.length) % projectNames.length
+  router.push({ name: 'project-detail', params: { projectName: projectNames[newIndex] } })
 }
 </script>
 
 <template>
   <div class="project-navigation">
-    <button @click="goToPreviousProject" class="navigation-button">
+    <button @click="navigateProject(-1)" class="navigation-button">
       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
         <path
           fill="currentColor"
@@ -31,7 +26,7 @@ const goToNextProject = () => {
       </svg>
       Anterior
     </button>
-    <button @click="goToNextProject" class="navigation-button">
+    <button @click="navigateProject(1)" class="navigation-button">
       Siguiente
       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
         <path fill="currentColor" d="M16.175 13H4v-2h12.175l-5.6-5.6L12 4l8 8l-8 8l-1.425-1.4z" />
