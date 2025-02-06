@@ -27,7 +27,6 @@ const paginatedCertifications = () => {
 
 <template>
   <div class="about-container">
-    <!-- Foto de perfil y presentación -->
     <div class="profile-photo-container">
       <div class="profile-photo">
         <img :src="profilePhoto" alt="Foto de Yubal Hormiga" />
@@ -93,7 +92,14 @@ const paginatedCertifications = () => {
           <li v-for="(tech, index) in profileData.techStack" :key="index">{{ tech }}</li>
         </ul>
       </div>
-
+      <div class="learnings">
+        <h4>En continuo aprendizaje</h4>
+        <ul>
+          <li v-for="(learnigItem, index) in profileData.learning" :key="index">
+            <p>{{ learnigItem }}</p>
+          </li>
+        </ul>
+      </div>
       <div class="skills">
         <h4>Habilidades</h4>
         <ul>
@@ -209,6 +215,7 @@ a.see-less:hover {
 .education,
 .certifications,
 .tech-stack,
+.learnings,
 .skills,
 .languages,
 .work-experience {
@@ -217,6 +224,7 @@ a.see-less:hover {
 
 .education p,
 .certifications p,
+.learnings p,
 .languages p,
 .job p {
   margin-bottom: 0;

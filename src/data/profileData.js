@@ -119,6 +119,10 @@ export const profileData = {
     'Firebase',
     'Git',
   ],
+  learning: [
+    `Actualmente, me encuentro ampliando mis conocimientos en WordPress, con el objetivo de mejorar mis habilidades en desarrollo de sitios web. Mi próximo paso es profundizar en el desarrollo backend con PHP y Laravel, con la intención de aumentar mi capacidad para trabajar con sistemas dinámicos y complejos.`,
+    `Mi meta es seguir evolucionando como desarrollador web, dominando nuevas tecnologías y herramientas que me permitan ofrecer soluciones innovadoras y eficaces para cualquier proyecto.`,
+  ],
   skills: [
     'Pensamiento crítico',
     'Aptitud positiva',
