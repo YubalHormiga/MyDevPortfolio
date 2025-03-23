@@ -1,20 +1,5 @@
 export const projectListData = [
   {
-    name: 'canineconnect',
-    title: 'CanineConnect',
-    description:
-      'Plataforma web que conecta a amantes de los perros con refugios para facilitar adopciones y reportar mascotas perdidas.',
-    technologies: [
-      'Vue.js',
-      'Firebase',
-      'Leaflet',
-      'Pinia',
-      'Vue Router',
-      'Vue Toast Notification',
-      'y otras tecnologías relevantes',
-    ],
-  },
-  {
     name: 'techmix',
     title: 'TechMix',
     description:
@@ -28,6 +13,21 @@ export const projectListData = [
       'Vue Router',
       'Vue Toast Notification',
       'Swiper',
+      'y otras tecnologías relevantes',
+    ],
+  },
+  {
+    name: 'canineconnect',
+    title: 'CanineConnect',
+    description:
+      'Plataforma web que conecta a amantes de los perros con refugios para facilitar adopciones y reportar mascotas perdidas.',
+    technologies: [
+      'Vue.js',
+      'Firebase',
+      'Leaflet',
+      'Pinia',
+      'Vue Router',
+      'Vue Toast Notification',
       'y otras tecnologías relevantes',
     ],
   },
